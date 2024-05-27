@@ -9,7 +9,7 @@
 
 
 -   Free software: MIT license
--   Documentation: https://amidn.github.io/km3kit
+-   Documentation: https://amidn.github.io/Km3Kit
     
 
 ## Features
