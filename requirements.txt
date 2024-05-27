@@ -1,0 +1,5 @@
+numpy
+pandas
+tables
+km3io
+km3net-testdata
