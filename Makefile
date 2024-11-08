@@ -1,49 +1,89 @@
-install:
-	pip install .
+.PHONY: clean clean-build clean-pyc clean-test coverage dist docs help install lint lint/flake8
 
-install-dev:
-	pip install -e ".[dev]"
-	python -m ipykernel install --user --name=km3kit
+.DEFAULT_GOAL := help
 
-clean:
-	python setup.py clean --all
+define BROWSER_PYSCRIPT
+import os, webbrowser, sys
 
-test:
-	py.test --junitxml=./reports/junit.xml -o junit_suite_name=km3kit tests
+from urllib.request import pathname2url
 
-test-cov:
-	py.test --cov src/km3kit --cov-report term-missing --cov-report xml:reports/coverage.xml --cov-report html:reports/coverage tests
+webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
+endef
+export BROWSER_PYSCRIPT
 
-test-loop:
-	py.test tests
-	ptw --ext=.py,.pyx --ignore=doc tests
+define PRINT_HELP_PYSCRIPT
+import re, sys
 
-flake8:
-	py.test --flake8
+for line in sys.stdin:
+	match = re.match(r'^([a-zA-Z_-]+):.*?## (.*)$$', line)
+	if match:
+		target, help = match.groups()
+		print("%-20s %s" % (target, help))
+endef
+export PRINT_HELP_PYSCRIPT
 
-pep8: flake8
+BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
-docstyle:
-	py.test --docstyle
+help:
+	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-lint:
-	py.test --pylint
+clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
-.PHONY: black
-black:
-	black --exclude 'version.py' src/km3kit
-	black examples
-	black tests
-	black doc/conf.py
-	black setup.py
+clean-build: ## remove build artifacts
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
 
-.PHONY: black-check
-black-check:
-	black --check --exclude 'version.py' src/km3kit
-	black --check examples
-	black --check tests
-	black --check doc/conf.py
-	black --check setup.py
+clean-pyc: ## remove Python file artifacts
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
+
+clean-test: ## remove test and coverage artifacts
+	rm -fr .tox/
+	rm -f .coverage
+	rm -fr htmlcov/
+	rm -fr .pytest_cache
+
+lint/flake8: ## check style with flake8
+	flake8 Km3Kit tests
 
 
-.PHONY: all clean install install-dev test  test-nocov flake8 pep8 docstyle black black-check
+lint: lint/flake8 ## check style
+
+test: ## run tests quickly with the default Python
+	python setup.py test
+
+test-all: ## run tests on every Python version with tox
+	tox
+
+coverage: ## check code coverage quickly with the default Python
+	coverage run --source Km3Kit setup.py test
+	coverage report -m
+	coverage html
+	$(BROWSER) htmlcov/index.html
+
+docs: ## generate Sphinx HTML documentation, including API docs
+	rm -f docs/Km3Kit.rst
+	rm -f docs/modules.rst
+	sphinx-apidoc -o docs/ Km3Kit
+	$(MAKE) -C docs clean
+	$(MAKE) -C docs html
+	$(BROWSER) docs/_build/html/index.html
+
+servedocs: docs ## compile the docs watching for changes
+	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+
+release: dist ## package and upload a release
+	twine upload dist/*
+
+dist: clean ## builds source and wheel package
+	python setup.py sdist
+	python setup.py bdist_wheel
+	ls -l dist
+
+install: clean ## install the package to the active Python's site-packages
+	python setup.py install

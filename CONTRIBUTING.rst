@@ -1,164 +1,137 @@
-Filing Bugs or Feature Requests
--------------------------------
+.. highlight:: shell
 
-Please **always** create an issue when you encounter any bugs, problems or
-need a new feature. Emails and private messages are not meant to communicate
-such things!
+============
+Contributing
+============
 
-Use the appropriate template and file a new issue here:
-https://git.km3net.de/anayerhoda/km3kit/issues
+Contributions are welcome, and they are greatly appreciated! Every little bit
+helps, and credit will always be given.
 
-You can browse all the issues here: https://git.km3net.de/anayerhoda/km3kit/issues
+You can contribute in many ways:
 
-Please follow the instructions in the templates to provide all the
-necessary information which will help other people to understand the
-situation.
+Types of Contributions
+----------------------
 
-Improve
--------
-
-Check out our KanBan board https://git.km3net.de/anayerhoda/km3kit/boards,
-which shows all the open issues in three columns:
-
-- *discussion*: The issues which are yet to be discussed (e.g. not clear how to proceed)
-- *todo*: Issues tagged with this label are ready to be tackled
-- *doing*: These issues are currently "work in progress". They can however be
-  put tossed back to *todo* column at any time if the development is suspended.
-
-Here is the recommended workflow if you want to improve this project. This is a
-standard procedure for collaborative software development, nothing exotic!
-
-Feel free to contribute ;)
-
-Make a Fork
+Report Bugs
 ~~~~~~~~~~~
 
-You create a fork (your full own copy of the
-repository), change the code and when you are happy with the changes, you create
-a merge request, so we can review, discuss and add your contribution.
-Merge requests are automatically tested on our GitLab CI server and you
-don't have to do anything special.
+Report bugs at https://github.com/Amidn/Km3Kit/issues.
 
-Go to https://git.km3net.de/anayerhoda/km3kit and click on "Fork".
+If you are reporting a bug, please include:
 
-After that, you will have a full copy of the code with write access under an URL
-like this: ``https://git.km3net.de/YOUR_USERNAME/km3kit``
+* Your operating system name and version.
+* Any details about your local setup that might be helpful in troubleshooting.
+* Detailed steps to reproduce the bug.
 
-Clone your Fork to your PC
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fix Bugs
+~~~~~~~~
 
-Get a local copy to work on (use the SSH address `git@git...`, not the HTTP one)::
+Look through the GitHub issues for bugs. Anything tagged with "bug" and "help
+wanted" is open to whoever wants to implement it.
 
-    git clone git@git.km3net.de:YOUR_USERNAME/km3kit
+Implement Features
+~~~~~~~~~~~~~~~~~~
 
-Now you need to add a reference to the original repository, so you can sync your
-own fork with the original repository::
+Look through the GitHub issues for features. Anything tagged with "enhancement"
+and "help wanted" is open to whoever wants to implement it.
 
-    cd km3kit
-    git remote add upstream https://git.km3net.de/anayerhoda/km3kit
+Write Documentation
+~~~~~~~~~~~~~~~~~~~
 
+Km3Kit could always use more documentation, whether as part of the
+official Km3Kit docs, in docstrings, or even on the web in blog posts,
+articles, and such.
 
-Keep your Fork Up to Date
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Submit Feedback
+~~~~~~~~~~~~~~~
 
-To get the most recent commits (including all branches), run::
+The best way to send feedback is to file an issue at https://github.com/Amidn/Km3Kit/issues.
 
-    git fetch upstream
+If you are proposing a feature:
 
-This will download all the missing commits and branches which are now accessible
-using the ``upstream/...`` prefix::
+* Explain in detail how it would work.
+* Keep the scope as narrow as possible, to make it easier to implement.
+* Remember that this is a volunteer-driven project, and that contributions
+  are welcome :)
 
-    $ git fetch upstream
-    From km3kit
-     * [new branch]        gitlab_jenkins_ci_test -> upstream/gitlab_jenkins_ci_test
-     * [new branch]        legacy                 -> upstream/legacy
-     * [new branch]        master                 -> upstream/master
+Get Started!
+------------
 
+Ready to contribute? Here's how to set up `Km3Kit` for local development.
 
-If you want to update for example your **own** ``master`` branch
-to contain all the changes on the official ``master`` branch of the original repository,
-switch to it first with::
+1. Fork the `Km3Kit` repo on GitHub.
+2. Clone your fork locally::
 
-    git checkout master
+    $ git clone git@github.com:your_name_here/Km3Kit.git
 
-and then merge the ``upstream/master`` into it::
+3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    git merge upstream/master
+    $ mkvirtualenv Km3Kit
+    $ cd Km3Kit/
+    $ python setup.py develop
 
-Make sure to regularly ``git fetch upstream`` and merge changes to your own branches.
+4. Create a branch for local development::
 
-Push your changes to Gitlab regularly
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    $ git checkout -b name-of-your-bugfix-or-feature
 
-Make sure to keep your fork up to date on the GitLab server by pushing
-all your commits regularly using::
+   Now you can make your changes locally.
 
-    git push
+5. When you're done making changes, check that your changes pass flake8 and the
+   tests, including testing other Python versions with tox::
 
-
-Install in Developer Mode
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This project can be installed in ``dev-mode``, which means, it links itself to
-your site-packages and you can edit the sources and test them without the need
-to reinstall it all the time. Although you will need to restart any
-``python``, ``ipython`` or ``jupyter``-notebook (only the kernel!) if you
-imported this python package before you made the changes.
-
-Go to your own fork folder (as described above) and check out the branch you
-want to work on::
-
-    git checkout master  # the main development branch (should always be stable)
-    make install-dev
-
-
-Running the Test Suite
-~~~~~~~~~~~~~~~~~~~~~~
-
-Make sure to run the test suite first to see if everything is working
-correctly::
-
+    $ make lint
     $ make test
+    Or
+    $ make test-all
 
-This should give you a green bar!
+   To get flake8 and tox, just pip install them into your virtualenv.
 
-Run the tests every time you make changes to see if you broke anything! It usually
-takes just a few seconds and ensures that you don't break existing code. It's
-also an easy way to spot syntax errors ;)
+6. Commit your changes and push your branch to GitHub::
 
-You can also start a script which will watch for file changes and retrigger
-a test suite run every time for you. It's a nice practice to have a terminal
-open running this script to check your test results continuously::
+    $ git add .
+    $ git commit -m "Your detailed description of your changes."
+    $ git push origin name-of-your-bugfix-or-feature
 
-    make test-loop
+7. Submit a pull request through the GitHub website.
 
-Time to Code
-~~~~~~~~~~~~
+Pull Request Guidelines
+-----------------------
 
-We develop new features and fix bugs on separate branches and merge them
-back to ``master`` when they are stable. Merge requests (see below) are also
-pointing towards this branch.
+Before you submit a pull request, check that it meets these guidelines:
 
-If you are working on your own fork, you can stay on your own ``master`` branch
-and create merge requests from that.
+1. The pull request should include tests.
+2. If the pull request adds functionality, the docs should be updated. Put
+   your new functionality into a function with a docstring, and add the
+   feature to the list in README.rst.
+3. The pull request should work for Python 3.5, 3.6, 3.7 and 3.8, and for PyPy. Check
+   https://travis-ci.com/Amidn/Km3Kit/pull_requests
+   and make sure that the tests pass for all supported Python versions.
 
-Code Style
-~~~~~~~~~~
+Tips
+----
 
-Make sure to run ``black`` over the code, which ensures that the code style
-matches the one we love and respect. We have a tool which makes it easy::
+To run a subset of tests::
 
-    make black
 
-Create a Merge Request (aka Pull Request)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    $ python -m unittest tests.test_Km3Kit
 
-Go to https://git.km3net.de/anayerhoda/km3kit/merge_requests/new and select your
-source branch, which contains the changes you want to be added to this project
-and select the ``master`` branch as target branch.
+Deploying
+---------
 
-That's it, the merge will be accepted if everything is OK ;)
+A reminder for the maintainers on how to deploy.
+Make sure all your changes are committed (including an entry in HISTORY.rst).
+Then run::
 
-If you want to join the dev-team, let us know! Once you are a member of the
-project, you can work on branches in this repository, without the need to
-use your own fork :)
+$ bump2version patch # possible: major / minor / patch
+$ git push
+$ git push --tags
+
+Travis will then deploy to PyPI if tests pass.
+
+Code of Conduct
+---------------
+
+Please note that this project is released with a `Contributor Code of Conduct`_.
+By participating in this project you agree to abide by its terms.
+
+.. _`Contributor Code of Conduct`: CODE_OF_CONDUCT.rst

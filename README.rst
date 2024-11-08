@@ -1,42 +1,41 @@
+======
+Km3Kit
+======
+
+
+.. image:: https://img.shields.io/pypi/v/Km3Kit.svg
+        :target: https://pypi.python.org/pypi/Km3Kit
+
+.. image:: https://img.shields.io/travis/Amidn/Km3Kit.svg
+        :target: https://travis-ci.com/Amidn/Km3Kit
+
+.. image:: https://readthedocs.org/projects/Km3Kit/badge/?version=latest
+        :target: https://Km3Kit.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
+
+
+.. image:: https://pyup.io/repos/github/Amidn/Km3Kit/shield.svg
+     :target: https://pyup.io/repos/github/Amidn/Km3Kit/
+     :alt: Updates
+
+
+
 Python package for cosmic neutrino analysis using KM3NeT data
-=============================================================
-
-.. image:: https://git.km3net.de/anayerhoda/km3kit/badges/master/pipeline.svg
-    :target: https://git.km3net.de/anayerhoda/km3kit/pipelines
-
-.. image:: https://git.km3net.de/anayerhoda/km3kit/badges/master/coverage.svg
-    :target: https://anayerhoda.pages.km3net.de/km3kit/coverage
-
-.. image:: https://git.km3net.de/examples/km3badges/-/raw/master/docs-latest-brightgreen.svg
-    :target: https://anayerhoda.pages.km3net.de/km3kit
 
 
-Installation
-~~~~~~~~~~~~
-
-It is recommended to first create an isolated virtualenvironment to not interfere
-with other Python projects::
-
-  git clone https://git.km3net.de/anayerhoda/km3kit
-  cd km3kit
-  python3 -m venv venv
-  . venv/bin/activate
-
-Install directly from the Git server via ``pip`` (no cloneing needed)::
-
-  pip install git+https://git.km3net.de/anayerhoda/km3kit
-
-Or clone the repository and run::
-
-  make install
-
-To install all the development dependencies, in case you want to contribute or
-run the test suite::
-
-  make install-dev
-  make test
+* Free software: MIT license
+* Documentation: https://Km3Kit.readthedocs.io.
 
 
----
+Features
+--------
 
-*Created with ``cookiecutter https://git.km3net.de/templates/python-project``*
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage

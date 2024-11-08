@@ -1,8 +1,5 @@
-try:
-    from importlib.metadata import version as get_version
-    version = get_version(__name__)
-except ImportError:
-    from pkg_resources import get_distribution
-    version = get_distribution(__name__).version
+"""Top-level package for Km3Kit."""
 
-from .calc import Calculator
+__author__ = """Amid Nayerhoda"""
+__email__ = 'anayerhoda@km3net.de'
+__version__ = '0.0.1'
