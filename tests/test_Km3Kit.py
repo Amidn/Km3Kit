@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 
-"""Tests for `Km3Kit` package."""
+"""Tests for `km3kit` package."""
+
+import pytest
 
 
-import unittest
-
-from Km3Kit import Km3Kit
+from km3kit import km3kit
 
 
-class TestKm3kit(unittest.TestCase):
-    """Tests for `Km3Kit` package."""
+@pytest.fixture
+def response():
+    """Sample pytest fixture.
 
-    def setUp(self):
-        """Set up test fixtures, if any."""
+    See more at: http://doc.pytest.org/en/latest/fixture.html
+    """
+    # import requests
+    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
 
-    def tearDown(self):
-        """Tear down test fixtures, if any."""
 
-    def test_000_something(self):
-        """Test something."""
+def test_content(response):
+    """Sample pytest test function with the pytest fixture as an argument."""
+    # from bs4 import BeautifulSoup
+    # assert 'GitHub' in BeautifulSoup(response.content).title.string

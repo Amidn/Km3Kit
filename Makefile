@@ -49,27 +49,27 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint/flake8: ## check style with flake8
-	flake8 Km3Kit tests
+	flake8 km3kit tests
 
 
 lint: lint/flake8 ## check style
 
 test: ## run tests quickly with the default Python
-	python setup.py test
+	pytest
 
 test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source Km3Kit setup.py test
+	coverage run --source km3kit -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/Km3Kit.rst
+	rm -f docs/km3kit.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ Km3Kit
+	sphinx-apidoc -o docs/ km3kit
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html

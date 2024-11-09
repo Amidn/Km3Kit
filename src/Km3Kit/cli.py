@@ -1,5 +1,5 @@
-"""Console script for Km3Kit."""
-import Km3Kit
+"""Console script for km3kit."""
+import km3kit
 
 import typer
 from rich.console import Console
@@ -10,9 +10,9 @@ console = Console()
 
 @app.command()
 def main():
-    """Console script for Km3Kit."""
+    """Console script for km3kit."""
     console.print("Replace this message by putting your code into "
-               "Km3Kit.cli.main")
+               "km3kit.cli.main")
     console.print("See Typer documentation at https://typer.tiangolo.com/")
     
 

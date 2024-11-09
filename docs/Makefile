@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = Km3Kit
+SPHINXPROJ    = km3kit
 SOURCEDIR     = .
 BUILDDIR      = _build
 

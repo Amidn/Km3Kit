@@ -1,1 +1,1 @@
-"""Unit test package for Km3Kit."""
+"""Unit test package for km3kit."""

@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Km3Kit"
+name = "km3kit"
 version = "0.0.1"
-description = "Python package for cosmic neutrino analysis using KM3NeT data"
+description = "A Python package for cosmic neutrino analysis with KM3NeT data."
 readme = "README.rst"
 authors = [
   {name = "Amid Nayerhoda", email = "anayerhoda@km3net.de"}
@@ -18,7 +18,7 @@ classifiers = [
 ]
 license = {text = "MIT license"}
 dependencies = [
-  
+  "typer"
 ]
 
 [project.optional-dependencies]
@@ -31,9 +31,9 @@ dev = [
 
 [project.urls]
 
-bugs = "https://github.com/Amidn/Km3Kit/issues"
-changelog = "https://github.com/Amidn/Km3Kit/blob/master/changelog.md"
-homepage = "https://github.com/Amidn/Km3Kit"
+bugs = "https://github.com/Amidn/km3kit/issues"
+changelog = "https://github.com/Amidn/km3kit/blob/master/changelog.md"
+homepage = "https://github.com/Amidn/km3kit"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

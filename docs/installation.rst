@@ -12,7 +12,7 @@ To install Km3Kit, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install Km3Kit
+    $ pip install km3kit
 
 This is the preferred method to install Km3Kit, as it will always install the most recent stable release.
 
@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/Amidn/Km3Kit
+    $ git clone git://github.com/Amidn/km3kit
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl -OJL https://github.com/Amidn/Km3Kit/tarball/master
+    $ curl -OJL https://github.com/Amidn/km3kit/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/Amidn/Km3Kit
-.. _tarball: https://github.com/Amidn/Km3Kit/tarball/master
+.. _Github repo: https://github.com/Amidn/km3kit
+.. _tarball: https://github.com/Amidn/km3kit/tarball/master
