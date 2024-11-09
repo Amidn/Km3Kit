@@ -1,0 +1,117 @@
+- name: arca21_data_v8.1.1
+  date_added: '2024-01-22'
+  data_type: h5
+  comment: ' arca21_data_v8.1.1_grb_thijsv3 data with dynamic calibration. April 2023.
+    - From /sps/km3net/users/tvaneede/dst_production/ARCA21/results/v3/merged/  (used
+    by Juan in GRB analysis)'
+  folder: ''
+  path:
+    data:
+      - /sps/km3net/users/juanpala/h5_production/arca21_data_v8.1.1_grb_thijsv3/datav8.1.1.jchain.aashower.dst.h5
+    data_livetime:
+      - /sps/km3net/users/juanpala/h5_production/arca21_data_v8.1.1_grb_thijsv3/rbrplanARCA21_v8.1_neutrinos_livetime_short.txt
+    muon:
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.mupage_tuned_100G.sirene.jterbr.jchain.aashower.dst.h5
+    muon_livetime: []
+    neutrino:
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_numu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anumu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anumu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_numu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
+    neutrino_livetime:
+      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/rbrplanARCA21_v8.1_neutrinos_livetime_short.txt
+
+
+
+- name: arca21_dst
+  date_added: '2024-08-06'
+  data_type: ROOT
+  comment: 'https://wiki.km3net.de/index.php/Astronomy/Neutrino_Sources/ANTARES_ARCA_PS_likelihood_analysis'
+  folder: ''
+  path:
+    neutrino:
+      -  numuCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_numu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  numuNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_numu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinumuCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anumu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinumuNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anumu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nueCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nueNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinueCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinueNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauCC_shower_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauCC_muon_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauCC_shower_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauCC_muon_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  numuCC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_numu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  numuNC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_numu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinumuCC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anumu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinumuNC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anumu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  nueCC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  nueNC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_nue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinueCC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinueNC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  nutauCC_shower_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_nutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  nutauCC_muon_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_nutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  nutauNC_BP:  /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_nutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinutauCC_shower_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinutauCC_muon_BP:  /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+      -  antinutauNC_BP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu_bp/N2022/reco_post_retrigger_mcv6.3_bp.gsg_anutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.arca.aashower.dst.merged_10046_10286inline.root 
+ 
+    muon:
+      - mu_100G_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_mu/mcv6.3.mupage_100G.sirene.jterbr.jchain.aashower.dst.merged_9635_10005.root 
+      - mu_100G_BP:  /sps/km3net/users/rmuller/production/dst/arca6rbr_mu_bp_post_re_trigger/N2022/mcv6.3_bp.mupage_100G.sirene.jterbr.jchain.aashower.dst.merged_10046_10286inline.root 
+ 
+    data:
+      - data_GP: /sps/km3net/users/rmuller/production/dst/arca6_data/datav6.2.jchain.aashower.dst.merged_9635_10005inline.root 
+      - data_BP: /sps/km3net/users/rmuller/production/dst/arca6_data/datav6.2.retr.jchain.aashower.dst.merged_10046_10286_inline.root 
+    muon_livetime: []
+    data_livetime: []
+    neutrino_livetime: []
+    
+    
+    
+
+
+- name: arca21_dst_GP
+  date_added: '2024-08-06'
+  data_type: ROOT
+  comment: ' https://wiki.km3net.de/index.php/Astronomy/Neutrino_Sources/ANTARES_ARCA_PS_likelihood_analysis'
+  folder: ''
+  path:
+    neutrino:
+      -  numuCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_numu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  numuNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_numu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinumuCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anumu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinumuNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anumu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nueCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nueNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinueCC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinueNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauCC_shower_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauCC_muon_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  nutauNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_nutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauCC_shower_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauCC_muon_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+      -  antinutauNC_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_nu/mcv6.4.gsg_anutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.merged_9635_10005_inline.root 
+
+    muon:
+      - mu_100G_GP: /sps/km3net/users/rmuller/production/dst/arca6rbr_mu/mcv6.3.mupage_100G.sirene.jterbr.jchain.aashower.dst.merged_9635_10005.root 
+
+    data:
+      - data_GP: /sps/km3net/users/rmuller/production/dst/arca6_data/datav6.2.jchain.aashower.dst.merged_9635_10005inline.root 
+
+    muon_livetime: []
+    data_livetime: []
+    neutrino_livetime: []
