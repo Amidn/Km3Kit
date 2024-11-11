@@ -5,7 +5,7 @@ from rootio import readroot
 
 def Read(input, verbose=False):
     # Retrieve data, neutrino, and muon files
-    data_files, neutrino_files, muon_files = Loader.read(input)
+    data_files, neutrino_files, muon_files = Loader.read_paths(input)
     type_ = Loader.get_data_type(input)
     
     # Verbose output for debugging
