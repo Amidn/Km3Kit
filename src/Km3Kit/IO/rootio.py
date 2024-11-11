@@ -21,7 +21,7 @@ def readroot(file_list, verbose=True):
     try:
         if verbose:
             print("Attempting to read 'E'")
-        file_content["E"] = uproot.concatenate([f"{file}:E" for file in file_list] , library="ak")
+        file_content["E"] = uproot.concatenate([f"{file}:E" for file in file_list] , library="np")
     except Exception as e:
         print(f"Error reading 'E': {e}")
         file_content["E"] = None
