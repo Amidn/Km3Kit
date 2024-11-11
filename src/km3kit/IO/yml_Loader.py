@@ -73,3 +73,4 @@ class Loader:
     def get_data_type(self):
         """Returns the data_type of the dataset."""
         return self.data_type
+    
