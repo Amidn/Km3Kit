@@ -10,7 +10,7 @@ def Read(input, verbose=True):
     
     # Retrieve data, neutrino, and muon files
     data_files, neutrino_files, muon_files = loader_instance.read_paths(input)
-    type_ = Loader.get_data_type(input)
+    type_ = loader_instance.get_data_type(input)
     
     # Verbose output for debugging
     if verbose:
