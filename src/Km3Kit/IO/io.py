@@ -9,7 +9,7 @@ def Read(input, verbose=True):
         raise ValueError(f"Dataset '{input}' not found or could not be loaded.")
     
     # Retrieve data, neutrino, and muon files
-    data_files, neutrino_files, muon_files = Loader.read_paths(input)
+    data_files, neutrino_files, muon_files = loader_instance.read_paths(input)
     type_ = Loader.get_data_type(input)
     
     # Verbose output for debugging
