@@ -1,6 +1,6 @@
 
-from yml_Loader import Loader
-from rootio import readroot
+from IO.yml_Loader import Loader
+from IO.rootio import readroot
 
 
 def Read(input, verbose=False):
