@@ -1,9 +1,13 @@
 
 from IO.yml_Loader import Loader
 from IO.rootio import readroot
-
+from .yml_Loader import Loader
 
 def Read(input, verbose=False):
+    loader_instance = Loader.readYML(input, verbose=verbose)
+    if loader_instance is None:
+        raise ValueError(f"Dataset '{input}' not found or could not be loaded.")
+    
     # Retrieve data, neutrino, and muon files
     data_files, neutrino_files, muon_files = Loader.read_paths(input)
     type_ = Loader.get_data_type(input)
