@@ -1,8 +1,8 @@
 import yaml
-
+ 
 class Loader:
     ALLOWED_DATA_TYPES = {"ROOT", "h5", "Panda", "CSV", "TXT"}
-    YAML_FILE_PATH = 'datasets.yml'  # Default YAML file path
+    YAML_FILE_PATH = '../config/dataset_registry.yml'  # Default YAML file path
 
     def __init__(self, name=None, date_added=None, data_type=None, comment=None, paths=None):
         self.name = name
