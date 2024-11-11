@@ -1,5 +1,5 @@
 import uproot
-
+import awkward as ak
 
 def readroot(file_list, verbose=True):
     file_content = {}
@@ -20,7 +20,7 @@ def readroot(file_list, verbose=True):
     try:
         if verbose:
             print("Attempting to read 'E'")
-        file_content["E"] = uproot.concatenate([f"{file}:E" for file in file_list])
+        file_content["E"] = uproot.concatenate([f"{file}:E" for file in file_list] , library="np")
     except Exception as e:
         print(f"Error reading 'E': {e}")
         file_content["E"] = None
@@ -29,7 +29,7 @@ def readroot(file_list, verbose=True):
     try:
         if verbose:
             print("Attempting to read 'T'")
-        file_content["T"] = uproot.concatenate([f"{file}:T" for file in file_list])
+        file_content["T"] = uproot.concatenate([f"{file}:T" for file in file_list], library="np")
     except Exception as e:
         print(f"Error reading 'T': {e}")
         file_content["T"] = None
