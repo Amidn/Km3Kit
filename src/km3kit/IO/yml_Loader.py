@@ -12,9 +12,8 @@ class Loader:
         self.paths = paths
 
     @classmethod
-    def read(cls, dataset_name, verbose=False):
+    def readYML(cls, dataset_name, verbose=False):
         """Reads the YAML file and returns a Loader instance for the dataset."""
-        # Use the default YAML file path
         file_path = cls.YAML_FILE_PATH
         try:
             with open(file_path, 'r') as file:
@@ -37,8 +36,7 @@ class Loader:
                         )
                         if verbose:
                             dataset_info.print_dataset_info()
-                        # Return the Loader instance
-                        return dataset_info
+                        return dataset_info  # Return the Loader instance
         except FileNotFoundError:
             print(f"The file '{file_path}' does not exist.")
         except yaml.YAMLError as exc:
@@ -63,14 +61,21 @@ class Loader:
                 print("   -", path)
         print("End of dataset information.")
 
-    def read_paths(self):
+    def read_paths(self, verbose=False):
         """Collects all file paths from the dataset."""
         neutrino_files = self.paths.get('neutrino', [])
         muon_files = self.paths.get('muon', [])
         data_files = self.paths.get('data', [])
+        
+        # Verbose output for path details
+        if verbose:
+            print("Paths retrieved from dataset:")
+            print("Data Files:", data_files)
+            print("Neutrino Files:", neutrino_files)
+            print("Muon Files:", muon_files)
+        
         return data_files, neutrino_files, muon_files
 
     def get_data_type(self):
         """Returns the data_type of the dataset."""
         return self.data_type
-    
