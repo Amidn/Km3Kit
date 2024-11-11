@@ -3,7 +3,7 @@ from IO.yml_Loader import Loader
 from IO.rootio import readroot
 from .yml_Loader import Loader
 
-def Read(input, verbose=False):
+def Read(input, verbose=True):
     loader_instance = Loader.readYML(input, verbose=verbose)
     if loader_instance is None:
         raise ValueError(f"Dataset '{input}' not found or could not be loaded.")

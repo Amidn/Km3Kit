@@ -1,7 +1,7 @@
 import uproot
 
 
-def readroot(file_list, verbose=False):
+def readroot(file_list, verbose=True):
     file_content = {}
     
     if verbose:

@@ -17,7 +17,7 @@ class Loader:
         self.paths = paths
 
     @classmethod
-    def readYML(cls, dataset_name, verbose=False):
+    def readYML(cls, dataset_name, verbose= True):
         """Reads the YAML file and returns a Loader instance for the dataset."""
         file_path = cls.YAML_FILE_PATH
         try:
