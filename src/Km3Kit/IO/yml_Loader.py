@@ -7,7 +7,7 @@ class Loader:
 # Construct the correct path to the YAML file
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     print ("BASE_DIR", BASE_DIR)
-    YAML_FILE_PATH = os.path.join(BASE_DIR, 'config', 'dataset_registry.yml')
+    YAML_FILE_PATH = os.path.join(BASE_DIR, '../config', 'dataset_registry.yml')
 
     def __init__(self, name=None, date_added=None, data_type=None, comment=None, paths=None):
         self.name = name
