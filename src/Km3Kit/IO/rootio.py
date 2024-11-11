@@ -1,5 +1,6 @@
 import uproot
 import awkward as ak
+import numpy as np
 
 def readroot(file_list, verbose=True):
     file_content = {}
