@@ -3,6 +3,44 @@ import awkward as ak
 import numpy as np
 
 
+
+def readroot(file_list, verbose=True):
+    file_content = {}
+
+    if verbose:
+        print("Setting up lazy loading for files:", file_list)
+
+    try:
+        if verbose:
+            print("Setting up lazy arrays for 'headerTree'")
+        file_content["headerTree"] = uproot.lazy([f"{file}:headerTree" for file in file_list])
+    except Exception as e:
+        print(f"Error setting up 'headerTree': {e}")
+        file_content["headerTree"] = None
+
+    try:
+        if verbose:
+            print("Setting up lazy arrays for 'E'")
+        file_content["E"] = uproot.lazy([f"{file}:E" for file in file_list])
+    except Exception as e:
+        print(f"Error setting up 'E': {e}")
+        file_content["E"] = None
+
+    try:
+        if verbose:
+            print("Setting up lazy arrays for 'T'")
+        file_content["T"] = uproot.lazy([f"{file}:T" for file in file_list])
+    except Exception as e:
+        print(f"Error setting up 'T': {e}")
+        file_content["T"] = None
+
+    if verbose:
+        print("Lazy arrays are set up. Data will be loaded when computations are performed.")
+
+    return file_content
+
+
+'''
 def readroot(file_list, verbose=True):
     file_content = {"headerTree": [], "E": [], "T": []}
 
@@ -48,7 +86,7 @@ def readroot(file_list, verbose=True):
 
     return file_content
 
-
+'''
 
 
 
