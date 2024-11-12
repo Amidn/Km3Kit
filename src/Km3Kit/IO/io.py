@@ -29,10 +29,10 @@ def Read(input, verbose=True):
     # Check if the data type is ROOT and proceed with reading
     if type_ == "ROOT":
 
-        start_time = time.time()
+        start_time1 = time.time()
         DATA_ = readroot(data_files)
         if verbose:
-            timeto(start_time, "reading data")
+            timeto(start_time1, "reading data")
 
         start_time = time.time()
         NEUTRINO_ = readroot(neutrino_files)
@@ -47,6 +47,6 @@ def Read(input, verbose=True):
         # Print the order of outputs if verbose is enabled
         if verbose:
             print("ORDER: DATA, NEUTRINO, MUON")
-        
+            timeto(start_time1, "reading all data")
         return DATA_, NEUTRINO_, MUON_
     
