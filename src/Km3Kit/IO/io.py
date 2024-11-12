@@ -2,6 +2,12 @@
 from IO.yml_Loader import Loader
 from IO.rootio import readroot
 from .yml_Loader import Loader
+import time 
+from utils.tools import report_time_interval as timeto
+
+
+
+
 
 def Read(input, verbose=True):
     loader_instance = Loader.readYML(input, verbose=verbose)
@@ -22,9 +28,21 @@ def Read(input, verbose=True):
     
     # Check if the data type is ROOT and proceed with reading
     if type_ == "ROOT":
+
+        start_time = time.time()
         DATA_ = readroot(data_files)
+        if verbose:
+            timeto(start_time, "reading data")
+
+        start_time = time.time()
         NEUTRINO_ = readroot(neutrino_files)
+        if verbose:
+            timeto(start_time, "reading neutrino")
+
+        start_time = time.time()
         MUON_ = readroot(muon_files)
+        if verbose:
+            timeto(start_time, "reading muons")
         
         # Print the order of outputs if verbose is enabled
         if verbose:
