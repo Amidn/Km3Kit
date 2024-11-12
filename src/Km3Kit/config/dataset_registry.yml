@@ -39,7 +39,7 @@
       - /sps/km3net/repo/data_processing/tag/v8.1/data_processing/prod/dst/KM3NeT_00000133/v4/merged_all/datav8.1.1.all.jchain.aashower.dst.root   
     data_livetime: []
     muon:
-      - /sps/km3net/repo/data_processing/tag/v8.1/data_processing/prod/dst/KM3NeT_00000133/v4/merged_all/ mcv8.1.all.mupage_tuned_100G.sirene.jterbr.jchain.aashower.dst.root
+      - /sps/km3net/repo/data_processing/tag/v8.1/data_processing/prod/dst/KM3NeT_00000133/v4/merged_all/mcv8.1.all.mupage_tuned_100G.sirene.jterbr.jchain.aashower.dst.root
     muon_livetime: []
     neutrino:
       - /sps/km3net/repo/data_processing/tag/v8.1/data_processing/prod/dst/KM3NeT_00000133/v4/merged_all/mcv8.1.all.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.root
