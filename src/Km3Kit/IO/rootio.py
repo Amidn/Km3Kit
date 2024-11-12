@@ -6,7 +6,74 @@ import numpy as np
 import uproot
 import awkward as ak
 import numpy as np
+ 
 
+
+import uproot
+import awkward as ak
+import numpy as np
+
+def readroot(file_list, branches_headerTree=None, branches_E=None, branches_T=None, verbose=True):
+    file_content = {}
+    
+    if verbose:
+        print("Reading files:", file_list)
+    
+    # Define default branches if not provided
+    if branches_headerTree is None:
+        branches_headerTree = ['livetime_s']  # Replace with actual branch names
+    if branches_E is None:
+        branches_E = ['Evt/run_id']
+    if branches_T is None:
+        branches_T = ['coords/trackfit_dec', 'coords/showerfit_ra']
+    
+    # Attempt to read "headerTree"
+    try:
+        if verbose:
+            print("Attempting to read 'headerTree'")
+        file_content["headerTree"] = uproot.concatenate(
+            [f"{file}:headerTree" for file in file_list],
+            expressions=branches_headerTree,
+            library="ak"
+        )
+    except Exception as e:
+        print(f"Error reading 'headerTree': {e}")
+        file_content["headerTree"] = None
+
+    # Attempt to read "E"
+    try:
+        if verbose:
+            print("Attempting to read 'E'")
+        file_content["E"] = uproot.concatenate(
+            [f"{file}:E" for file in file_list],
+            expressions=branches_E,
+            library="np"
+        )
+    except Exception as e:
+        print(f"Error reading 'E': {e}")
+        file_content["E"] = None
+
+    # Attempt to read "T"
+    try:
+        if verbose:
+            print("Attempting to read 'T'")
+        file_content["T"] = uproot.concatenate(
+            [f"{file}:T" for file in file_list],
+            expressions=branches_T,
+            library="ak"
+        )
+    except Exception as e:
+        print(f"Error reading 'T': {e}")
+        file_content["T"] = None
+
+    # Final output in verbose mode
+    if verbose:
+        print("Completed reading. Contents:", file_content.keys())
+
+    return file_content
+
+
+''' 
 def readroot(file_list, verbose=True, step_size="100 MB"):
     if verbose:
         print("Reading files in batches:", file_list)
@@ -49,7 +116,7 @@ def readroot(file_list, verbose=True, step_size="100 MB"):
         print("Completed reading files in batches.")
 
     return file_content
-
+'''
 
 
 '''
