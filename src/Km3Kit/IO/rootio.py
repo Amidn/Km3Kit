@@ -3,15 +3,6 @@ import awkward as ak
 import numpy as np
 
 
-import uproot
-import awkward as ak
-import numpy as np
- 
-
-
-import uproot
-import awkward as ak
-import numpy as np
 
 def readroot(file_list, branches_headerTree=None, branches_E = None, branches_T=None, verbose=True):
     file_content = {}
