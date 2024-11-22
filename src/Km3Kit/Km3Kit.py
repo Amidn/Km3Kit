@@ -1,15 +1,18 @@
-"""Main module."""
-from IO.io import Read
+from utils.yaml_utils import Loader, load_branches_config
 
-DATA, NEUTRINO, MUON = Read("arca21_dst", verbose=True)
-#DATA, NEUTRINO, MUON = Read("arca21_bdt", verbose=True)
+# Load dataset configuration
+dataset_name = "arca21_bdt"
+loader_instance = Loader.readYML(dataset_name, verbose=True)
 
-# Example: Access data from "branch1"
-branch1_data = DATA["E"]
+# Retrieve paths for the dataset
+data_dict, muon_dict, neutrino_dict = loader_instance.read_paths(verbose=True)
 
-# Create a histogram of branch1 data (for example)
-#plt.hist(branch1_data, bins=50)
-#plt.xlabel("Branch1 Values")
-#plt.ylabel("Frequency")
-#plt.title("Histogram of Branch1")
-#plt.show()
+# Load branch configurations
+branches = load_branches_config("config/branches.yml")
+E_branches = branches["E_branches"]
+T_branches = branches["T_branches"]
+
+# Print results
+print("E_branches:", E_branches)
+print("T_branches:", T_branches)
+print("Data Paths:", data_dict["data"])

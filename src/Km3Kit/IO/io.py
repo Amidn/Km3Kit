@@ -1,7 +1,7 @@
 
-from Km3Kit.utils.yml_Loader import Loader
+from Km3Kit.utils.yaml_utils import Loader
 from IO.rootio import readroot
-from ..utils.yml_Loader import Loader
+from ..utils.yaml_utils import Loader
 import time 
 from utils.tools import report_time_interval as timeto
 from rootio import load_dst
