@@ -1,12 +1,7 @@
-from io.io import DF_
+from Km3Kit import DF_, BRANCHES_YML, DATASET_REGISTRY_YML
 
-# Example usage
-dataset_name = "arca21_bdt"
-branches_config_path = "config/branches.yml"
+print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 
-# Load data (e.g., "data", "muon", or "nu")
-df = DF_(dataset_name, branches_config_path, data_type="data", verbose=True)
-
-# Display the DataFrame
-print("Loaded DataFrame:")
+# Use DF_ to load a DataFrame
+df = DF_(dataset_name="arca21_bdt", branches_config_path=BRANCHES_YML, data_type="data", verbose=True)
 print(df.head())
