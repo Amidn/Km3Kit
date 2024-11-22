@@ -66,20 +66,31 @@ class Loader:
                 print("   -", path)
         print("End of dataset information.")
 
-    def read_paths(self, verbose=False):
-        """Collects all file paths from the dataset."""
-        neutrino_files = self.paths.get('neutrino', [])
-        muon_files = self.paths.get('muon', [])
-        data_files = self.paths.get('data', [])
-        
+    def read_paths(self, verbose=False):    
+        """
+        Collects all file paths from the dataset and formats them as dictionaries
+        with a single key corresponding to the category and a set of file paths as the value.
+
+        Args:
+            verbose (bool): Whether to print detailed output.
+
+        Returns:
+            tuple: Dictionaries for data, muon, and neutrino paths.
+        """
+        # Format paths as dictionaries with one key and a set of values
+        data_dict = {"data": "\n".join(self.paths.get("data", []))}
+        muon_dict = {"muon": "\n".join(self.paths.get("muon", []))}
+        neutrino_dict = {"neutrino": "\n".join(self.paths.get("neutrino", []))}
+
         # Verbose output for path details
         if verbose:
             print("Paths retrieved from dataset:")
-            print("Data Files:", data_files)
-            print("Neutrino Files:", neutrino_files)
-            print("Muon Files:", muon_files)
-        
-        return data_files, neutrino_files, muon_files
+            print("Data Files:\n", data_dict["data"])
+            print("Muon Files:\n", muon_dict["muon"])
+            print("Neutrino Files:\n", neutrino_dict["neutrino"])
+    
+        return data_dict, muon_dict, neutrino_dict
+ 
 
     def get_data_type(self):
         """Returns the data_type of the dataset."""

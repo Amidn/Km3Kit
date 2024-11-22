@@ -1,13 +1,30 @@
 
-from IO.yml_Loader import Loader
+from Km3Kit.utils.yml_Loader import Loader
 from IO.rootio import readroot
-from .yml_Loader import Loader
+from ..utils.yml_Loader import Loader
 import time 
 from utils.tools import report_time_interval as timeto
+from rootio import load_dst
+from config.config_loader import load_branches_config
+# Load branches using the default path
+config = load_branches_config()
+
+E_branches = config["E_branches"]
+T_branches = config["T_branches"]
+
+# Assuming you have an instance of Loader for a specific dataset
+loader_instance = Loader.readYML("arca21_bdt", verbose=True)
+
+# Retrieve paths as dictionaries
+data_dict, muon_dict, neutrino_dict = loader_instance.read_paths(verbose=True)
+
+def dataframe(df_, E_branches, T_branches ):
+     # Pass these to your function
+    DF_data = load_dst(E_branches, T_branches, df_, verbose=True)
+    return DF_data
 
 
-
-
+"""
 
 def Read(input, verbose=True):
     loader_instance = Loader.readYML(input, verbose=verbose)
@@ -50,3 +67,5 @@ def Read(input, verbose=True):
             timeto(start_time1, "reading all data")
         return DATA_, NEUTRINO_, MUON_
     
+        
+        """
