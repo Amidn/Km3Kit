@@ -23,7 +23,7 @@ from .IO.io import DF_
 from .IO.rootio import load_dst
 
 # Exposing YAML utility functions and classes
-from .utils.yaml_utils import Loader, load_branches_config
+from .utils.yml_utils import Loader, load_branches_config
 
 # Exposing performance monitoring tools
 from .utils.tools import report_time_interval, report_memory_usage

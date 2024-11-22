@@ -1,6 +1,6 @@
 
 from .rootio import load_dst
-from utils.yaml_utils import Loader, load_branches_config
+from ..utils.yml_utils import Loader, load_branches_config
 
 
 def DF_(dataset_name="arca21_bdt", branches_config_path="config/branches.yml", data_type="data", verbose=False):
