@@ -1,5 +1,5 @@
 
-from rootio import load_dst
+from .rootio import load_dst
 from utils.yaml_utils import Loader, load_branches_config
 
 
