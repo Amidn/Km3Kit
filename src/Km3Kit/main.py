@@ -5,9 +5,9 @@ from utils.yml_utils import readConfigs
 Configs = readConfigs()  # Should return a dictionary
 
 print("Raw configs:", Configs)  # To inspect the parsed data
-print(type(configs))  # To confirm the data type
+print(type(Configs))  # To confirm the data type
 # Access the desired value
-saving_dir = configs["FileConfig"]["Saving_Dir"]
+saving_dir = Configs["FileConfig"]["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
 
 
