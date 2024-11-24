@@ -1,4 +1,4 @@
-from Km3Kit import , BRANCHES_YML, DATASET_REGISTRY_YML
+from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
 
 print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 
