@@ -1,7 +1,7 @@
 # src/Km3Kit/IO/__init__.py
 
 # Expose key modules or functions for ease of import
-from .io import DF_
-from .rootio import load_dst
+from .io import read
+from .rootio import load_dst, pd_dataFrame
 
-__all__ = ["DF_", "load_dst"]
+__all__ = ["read", "load_dst", "pd_dataFrame"]

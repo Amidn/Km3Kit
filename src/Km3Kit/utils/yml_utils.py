@@ -1,5 +1,7 @@
 import yaml
 import os
+from datetime import datetime
+
 
 
 class Loader:
@@ -134,8 +136,6 @@ class Loader:
             return []
     
 
-
-
 def load_branches_config(file_path="config/branches.yml"):
     """
     Load the E and T branches configuration from a YAML file.
@@ -154,10 +154,6 @@ def load_branches_config(file_path="config/branches.yml"):
         config = yaml.safe_load(f)
     return config
 
-
-import yaml
-import os
-from datetime import datetime
 
 def add_dataset_to_registry(
     name,

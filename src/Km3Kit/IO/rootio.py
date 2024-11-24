@@ -7,8 +7,6 @@ from Km3Kit.utils.tools import report_time_interval, report_memory_usage
 from ..utils.yml_utils import Loader, load_branches_config
 
 
-
-
 def load_dst(E_branches, T_branches, file_paths, verbose=False):
     E_tree = "E"
     T_tree = "T"
@@ -100,8 +98,7 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
     return DF_MC
 
 
-
-def DF_(dataset_name="arca21_bdt", branches_config_path="config/branches.yml", data_type="data", verbose=False):
+def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branches.yml", data_type="data", verbose=False):
     """
     Loads data into a Pandas DataFrame based on the dataset name, branch configuration, and data type.
 

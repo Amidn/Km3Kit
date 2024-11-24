@@ -7,10 +7,10 @@ print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 #print(df.head())
 
 
-from Km3Kit import DF_
+from Km3Kit import pd_dataFrame
 
 # Load the data from the ROOT files listed in the dataset_registry.yml
-df_data = DF_(
+df_data = pd_dataFrame(
     dataset_name="arca21_bdt",
     branches_config_path="config/branches.yml",
     data_type="data",

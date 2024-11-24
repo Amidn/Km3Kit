@@ -8,7 +8,7 @@ __version__ = '0.0.1'
 import os
 
 __all__ = [
-    "DF_",
+    "pd_dataFrame",
     "load_dst",
     "Loader",
     "load_branches_config",
@@ -17,11 +17,12 @@ __all__ = [
     "BRANCHES_YML",
     "DATASET_REGISTRY_YML",
     "add_dataset_to_registry",
+    "read",
 ]
 
 # Exposing data-loading and processing functions
-from .IO.io import DF_
-from .IO.rootio import load_dst
+from .IO.io import read
+from .IO.rootio import load_dst, pd_dataFrame
 
 # Exposing YAML utility functions and classes
 from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry
