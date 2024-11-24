@@ -19,7 +19,7 @@ __all__ = [
 ]
 
 # Exposing data-loading and processing functions
-from .IO.io import DF_
+from IO.io import DF_
 from .IO.rootio import load_dst
 
 # Exposing YAML utility functions and classes
