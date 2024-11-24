@@ -1,17 +1,13 @@
 
 from utils.yml_utils import readConfigs
 
-# Read the configuration
-configs = readConfigs()  # Should return a dictionary
 configs = readConfigs()
-print("Raw configs:", configs)  # To inspect the parsed data
-print(type(configs))  # To confirm the data type
-# Access the desired value
+
+if isinstance(configs, list):
+    configs = configs[0]  # Access the first item if it's a list
+
 saving_dir = configs["FileConfig"]["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
-
-
-
 
 
 print ("------------------")
