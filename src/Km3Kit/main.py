@@ -2,7 +2,7 @@
 from utils.yml_utils import readConfigs
 
 # Read the configuration
-Configs = readConfigs()  # Should return a dictionary
+Configs = readConfigs( verbose=True )  # Should return a dictionary
 
 
 saving_dir = Configs["FileConfig"]["Saving_Dir"]
