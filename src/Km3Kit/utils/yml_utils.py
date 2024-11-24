@@ -268,7 +268,7 @@ def readConfigs(file_path="config/Config.yml", verbose=False):
             raw_content = f.read()
             print("\n--------------\nConfig content:")
             print(raw_content)  # Debug print to see the actual file content
-            print("\n--------------")
+            print("--------------")
     # Load the YAML content
     with open(file_path, "r") as f:
         config_data = yaml.safe_load(f)
