@@ -6,7 +6,8 @@ from utils.yml_utils import readConfigs
 
 # Read the configuration
 configs = readConfigs()  # Should return a dictionary
-
+print(type(configs))  # Should be <class 'dict'>
+print(configs) 
 # Access the desired value
 saving_dir = configs["FileConfig"]["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
