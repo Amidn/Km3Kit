@@ -7,11 +7,10 @@ from utils.yml_utils import readConfigs
 
 # Read the configuration
 configs = readConfigs()
-
-# Access specific configuration values
 saving_dir = configs["FileConfig"]["Saveing_Dir"]
+print(f"Saving directory: {saving_dir}")
 
-print(f"The saving directory is: {saving_dir}")
+
 
 print ("------------------")
 from Km3Kit import pd_dataFrame

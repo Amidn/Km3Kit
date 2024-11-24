@@ -244,7 +244,6 @@ def add_dataset_to_registry(
 
 
 
-
 def readConfigs(config_file_name="config.yml"):
     """
     Reads a YAML configuration file and returns its contents.
@@ -255,12 +254,12 @@ def readConfigs(config_file_name="config.yml"):
     Returns:
         dict: Dictionary containing the configuration data.
     """
-    import yaml
-    import os
 
     # Dynamically determine the base directory
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    print(f"BASE_DIR: {BASE_DIR}")
     config_file_path = os.path.join(BASE_DIR, '../config', config_file_name)
+    print(f"Config File Path: {config_file_path}")
 
     # Ensure the file exists
     if not os.path.exists(config_file_path):
@@ -269,11 +268,10 @@ def readConfigs(config_file_name="config.yml"):
     # Load and parse the YAML file
     with open(config_file_path, "r") as file:
         configs = yaml.safe_load(file)
+        print(f"Loaded Configs: {configs}")
 
-    # If configs is a list, use the first document
-    if isinstance(configs, list):
-        if len(configs) == 0:
-            raise ValueError("The configuration file is empty.")
-        configs = configs[0]  # Use the first document
+    # If configs is None or empty, raise an error
+    if not configs:
+        raise ValueError("Configuration file is empty or improperly formatted.")
 
     return configs
