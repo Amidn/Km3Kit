@@ -141,7 +141,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
     elif data_type == "nu":
         file_paths = neutrino_dict["neutrino"].split("\n")
     else:
-        raise ValueError(f"Invalid data type '{data_type}'. Must be 'data', 'muon', or 'nu'.")
+        raise ValueError(f"Invalid data type '{data_type}'. Must be 'data', 'muon', or 'neutrino'.")
 
     if verbose:
         print(f"File paths to be processed for '{data_type}':")

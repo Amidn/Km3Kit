@@ -11,6 +11,7 @@ __all__ = [
     "pd_dataFrame",
     "load_dst",
     "Loader",
+    "readConfigs",
     "load_branches_config",
     "report_time_interval",
     "report_memory_usage",
@@ -25,7 +26,7 @@ from .IO.io import read
 from .IO.rootio import load_dst, pd_dataFrame
 
 # Exposing YAML utility functions and classes
-from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry
+from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry, readConfigs
 
 # Exposing performance monitoring tools
 from .utils.tools import report_time_interval, report_memory_usage

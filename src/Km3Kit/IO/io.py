@@ -2,8 +2,17 @@
 import astropy.units as u
 from astropy.coordinates import SkyCoord
 from gammapy.data import EventList
-from .rootio import load_dst
+from .rootio import load_dst, pd_dataFrame
 from ..utils.yml_utils import Loader, load_branches_config
+
+def NEWFUNC(dataset_name=None, branches_config_path="config/branches.yml", save_dir = None ,  verbose=True):
+    df_data = pd_dataFrame( dataset_name, branches_config_path , data_type="data",  verbose=True)
+    df_muon = pd_dataFrame( dataset_name, branches_config_path , data_type="muon",  verbose=True)
+    df_neutrino = pd_dataFrame( dataset_name, branches_config_path , data_type="neutrino",  verbose=True)
+
+
+
+
 
 
 def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_registry_path="config/dataset_registry.yml"):

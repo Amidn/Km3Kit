@@ -2,8 +2,18 @@ from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
 
 print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 
+# Import the function
+from utils.yml_utils import readConfigs
 
+# Read the configuration
+configs = readConfigs()
 
+# Access specific configuration values
+saving_dir = configs["FileConfig"]["Saveing_Dir"]
+
+print(f"The saving directory is: {saving_dir}")
+
+print ("------------------")
 from Km3Kit import pd_dataFrame
 
 # Load the data from the ROOT files listed in the dataset_registry.yml
