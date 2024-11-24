@@ -7,7 +7,7 @@ from utils.yml_utils import readConfigs
 
 # Read the configuration
 configs = readConfigs()
-saving_dir = configs["FileConfig"]["Saveing_Dir"]
+saving_dir = configs["FileConfig"]["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
 
 
