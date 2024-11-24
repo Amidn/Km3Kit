@@ -241,19 +241,24 @@ def add_dataset_to_registry(
     except Exception as e:
         print(f"Error while updating the registry: {e}")
         return False
-    
 
 
-def readConfigs(config_file_path="config/config.yaml"):
+
+
+def readConfigs(config_file_name="config.yaml"):
     """
     Reads a YAML configuration file and returns its contents.
 
     Args:
-        config_file_path (str): Path to the YAML configuration file.
+        config_file_name (str): Name of the YAML configuration file.
         
     Returns:
         dict: Dictionary containing the configuration data.
     """
+    # Dynamically determine the base directory
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(BASE_DIR, '../config', config_file_name)
+
     # Ensure the file exists
     if not os.path.exists(config_file_path):
         raise FileNotFoundError(f"Configuration file not found: {config_file_path}")
@@ -261,5 +266,5 @@ def readConfigs(config_file_path="config/config.yaml"):
     # Load and parse the YAML file
     with open(config_file_path, "r") as file:
         config_data = yaml.safe_load(file)
-    
+
     return config_data
