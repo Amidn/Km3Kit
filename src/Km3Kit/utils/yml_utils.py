@@ -95,6 +95,43 @@ class Loader:
     def get_data_type(self):
         """Returns the data_type of the dataset."""
         return self.data_type
+
+    @classmethod
+    def list_datasets_and_types(cls, yaml_registry_path=None, verbose=False):
+        """
+        Extracts a list of dataset names and their data types from the YAML registry.
+
+        Args:
+            yaml_registry_path (str): Path to the YAML registry file. Defaults to the class YAML_FILE_PATH.
+            verbose (bool): If True, prints detailed logs.
+
+        Returns:
+            list: A list of tuples [(dataset_name, data_type), ...].
+        """
+        yaml_registry_path = yaml_registry_path or cls.YAML_FILE_PATH
+        try:
+            with open(yaml_registry_path, "r") as file:
+                data = yaml.safe_load(file)
+
+            # Extract names and data types
+            datasets = [(entry.get("name"), entry.get("data_type")) for entry in data]
+
+            if verbose:
+                print("Datasets and Types:")
+                for name, dtype in datasets:
+                    print(f"- {name}: {dtype}")
+
+            return datasets
+
+        except FileNotFoundError:
+            print(f"Error: Registry file not found at {yaml_registry_path}")
+            return []
+        except yaml.YAMLError as exc:
+            print(f"Error reading YAML file: {exc}")
+            return []
+        except Exception as exc:
+            print(f"An unexpected error occurred: {exc}")
+            return []
     
 
 
