@@ -3,10 +3,7 @@ from utils.yml_utils import readConfigs
 
 configs = readConfigs()
 
-if isinstance(configs, list):
-    configs = configs[0]  # Access the first item if it's a list
-
-saving_dir = configs["FileConfig"]["Saving_Dir"]
+saving_dir = configs["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
 
 
