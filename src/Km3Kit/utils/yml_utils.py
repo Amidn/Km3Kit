@@ -243,35 +243,36 @@ def add_dataset_to_registry(
         return False
 
 
-
-def readConfigs(config_file_name="config.yml"):
+ 
+def read_configs(config_path="../config/config.yaml", key=None):
     """
-    Reads a YAML configuration file and returns its contents.
+    Reads a configuration YAML file and retrieves the value for a specified key.
 
     Args:
-        config_file_name (str): Name of the YAML configuration file.
-        
+        config_path (str): Path to the YAML configuration file.
+        key (str): Key to retrieve from the configuration file. 
+                   If None, the entire configuration is returned.
+
     Returns:
-        dict: Dictionary containing the configuration data.
+        dict or any: The value associated with the given key, or the entire config if key is None.
     """
+    # Ensure the config file exists
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Configuration file not found at: {config_path}")
 
-    # Dynamically determine the base directory
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    print(f"BASE_DIR: {BASE_DIR}")
-    config_file_path = os.path.join(BASE_DIR, '../config', config_file_name)
-    print(f"Config File Path: {config_file_path}")
+    with open(config_path, "r") as file:
+        config = yaml.safe_load(file)
 
-    # Ensure the file exists
-    if not os.path.exists(config_file_path):
-        raise FileNotFoundError(f"Configuration file not found: {config_file_path}")
+    if key:
+        # Retrieve the value for the specified key
+        keys = key.split("/")  # Handle nested keys (e.g., "FileConfig/Saveing_Dir")
+        value = config
+        for k in keys:
+            if k in value:
+                value = value[k]
+            else:
+                raise KeyError(f"Key '{key}' not found in the configuration.")
+        return value
 
-    # Load and parse the YAML file
-    with open(config_file_path, "r") as file:
-        configs = yaml.safe_load(file)
-        print(f"Loaded Configs: {configs}")
-
-    # If configs is None or empty, raise an error
-    if not configs:
-        raise ValueError("Configuration file is empty or improperly formatted.")
-
-    return configs
+    # Return the entire configuration if no key is specified
+    return config
