@@ -255,6 +255,9 @@ def readConfigs(config_file_name="config.yml"):
     Returns:
         dict: Dictionary containing the configuration data.
     """
+    import yaml
+    import os
+
     # Dynamically determine the base directory
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     config_file_path = os.path.join(BASE_DIR, '../config', config_file_name)
@@ -265,6 +268,12 @@ def readConfigs(config_file_name="config.yml"):
 
     # Load and parse the YAML file
     with open(config_file_path, "r") as file:
-        config_data = yaml.safe_load(file)
+        configs = yaml.safe_load(file)
 
-    return config_data
+    # If configs is a list, use the first document
+    if isinstance(configs, list):
+        if len(configs) == 0:
+            raise ValueError("The configuration file is empty.")
+        configs = configs[0]  # Use the first document
+
+    return configs
