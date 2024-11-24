@@ -1,15 +1,11 @@
 FileConfig:
-  Saveing_Dir: /pbs/home/a/anayerho/SPS/DataSets/Km3KitProductions/
-  formt: PDF
+  Saving_Dir: /pbs/home/a/anayerho/SPS/DataSets/Km3KitProductions/
+  format: PDF
 
 plots_Dir:
-  Saveing_Dir: /pbs/home/a/anayerho/SPS/Plots/
+  Saving_Dir: /pbs/home/a/anayerho/SPS/Plots/
   format: png
 
 DataLoading:
   skip_Saving: False
-
-
-
-
 
