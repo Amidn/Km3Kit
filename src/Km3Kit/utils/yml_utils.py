@@ -245,17 +245,32 @@ def add_dataset_to_registry(
 
 
 
-def readConfigs(file_path="config/Config.yml"):
+import os
+import yaml
+
+def readConfigs(file_path="config/Config.yml", verbose=False):
+    """
+    Reads a YAML configuration file and returns its content as a dictionary.
+
+    Args:
+        file_path (str): Path to the YAML configuration file.
+        verbose (bool): If True, prints the raw YAML content for debugging.
+
+    Returns:
+        dict: Parsed content of the YAML configuration file.
+    """
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Configuration file not found: {file_path}")
     
-    with open(file_path, "r") as f:
-        raw_content = f.read()
-        print("Raw YAML content:")
-        print(raw_content)  # Debug print to see the actual file content
+    # Optionally print the raw YAML content
+    if verbose:
+        with open(file_path, "r") as f:
+            raw_content = f.read()
+            print("Config content:")
+            print(raw_content)  # Debug print to see the actual file content
     
+    # Load the YAML content
     with open(file_path, "r") as f:
         config_data = yaml.safe_load(f)
-        print("Parsed YAML content:", config_data)  # Debug parsed content
     
     return config_data
