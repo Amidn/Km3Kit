@@ -1,6 +1,3 @@
-from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
-
-print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 
 from utils.yml_utils import readConfigs
 
@@ -14,9 +11,12 @@ print(f"Saving directory: {saving_dir}")
 
 
 
-print ("------------------")
-from Km3Kit import pd_dataFrame
 
+
+print ("------------------")
+from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
+from Km3Kit import pd_dataFrame
+'''
 # Load the data from the ROOT files listed in the dataset_registry.yml
 df_data = pd_dataFrame(
     dataset_name="arca21_bdt",
@@ -26,5 +26,6 @@ df_data = pd_dataFrame(
 )
 
 # Display the first few rows of the resulting DataFrame
-print(df_data.head())
+print(df_data.head())'''
+
 
