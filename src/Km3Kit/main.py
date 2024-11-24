@@ -2,11 +2,12 @@ from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
 
 print(BRANCHES_YML)  # Output: /path/to/Km3Kit/config/branches.yml
 
-# Import the function
 from utils.yml_utils import readConfigs
 
 # Read the configuration
-configs = readConfigs()
+configs = readConfigs()  # Should return a dictionary
+
+# Access the desired value
 saving_dir = configs["FileConfig"]["Saving_Dir"]
 print(f"Saving directory: {saving_dir}")
 

@@ -243,36 +243,12 @@ def add_dataset_to_registry(
         return False
 
 
- 
-def readConfigs(config_path="config/config.yml", key=None):
-    """
-    Reads a configuration YAML file and retrieves the value for a specified key.
 
-    Args:
-        config_path (str): Path to the YAML configuration file.
-        key (str): Key to retrieve from the configuration file. 
-                   If None, the entire configuration is returned.
-
-    Returns:
-        dict or any: The value associated with the given key, or the entire config if key is None.
-    """
-    # Ensure the config file exists
-    if not os.path.exists(config_path):
-        raise FileNotFoundError(f"Configuration file not found at: {config_path}")
-
-    with open(config_path, "r") as file:
-        config = yaml.safe_load(file)
-
-    if key:
-        # Retrieve the value for the specified key
-        keys = key.split("/")  # Handle nested keys (e.g., "FileConfig/Saveing_Dir")
-        value = config
-        for k in keys:
-            if k in value:
-                value = value[k]
-            else:
-                raise KeyError(f"Key '{key}' not found in the configuration.")
-        return value
-
-    # Return the entire configuration if no key is specified
-    return config
+def readConfigs(file_path="config/config.yaml"):
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Configuration file not found: {file_path}")
+    
+    with open(file_path, "r") as f:
+        config_data = yaml.safe_load(f)
+    
+    return config_data
