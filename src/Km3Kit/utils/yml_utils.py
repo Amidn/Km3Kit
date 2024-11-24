@@ -245,7 +245,7 @@ def add_dataset_to_registry(
 
 
 
-def readConfigs(config_file_name="config.yaml"):
+def readConfigs(config_file_name="config.yml"):
     """
     Reads a YAML configuration file and returns its contents.
 
