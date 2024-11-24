@@ -153,3 +153,95 @@ def load_branches_config(file_path="config/branches.yml"):
     with open(file_path, "r") as f:
         config = yaml.safe_load(f)
     return config
+
+
+import yaml
+import os
+from datetime import datetime
+
+def add_dataset_to_registry(
+    name,
+    data_type,
+    comment,
+    directory_path,
+    data_name=None,
+    muon_name=None,
+    neutrino_name=None,
+    yml_registry_path="config/dataset_registry.yml",
+    verbose=False,
+):
+    """
+    Adds a new dataset to the dataset registry YAML file without modifying existing entries.
+
+    Args:
+        name (str): Name of the dataset.
+        data_type (str): Type of the dataset (e.g., ROOT, FITS, Pandas).
+        comment (str): Comment describing the dataset.
+        directory_path (str): Base directory path where the files are located.
+        data_name (str): Filename for the data file.
+        muon_name (str): Filename for the muon file.
+        neutrino_name (str): Filename for the neutrino file.
+        yml_registry_path (str): Path to the dataset registry YAML file.
+        verbose (bool): If True, prints detailed logs.
+
+    Returns:
+        bool: True if the dataset was added successfully, False otherwise.
+    """
+    if not os.path.exists(yml_registry_path):
+        print(f"Error: Registry file '{yml_registry_path}' not found.")
+        return False
+
+    # Construct full paths for data, muon, and neutrino files
+    data_paths = [os.path.join(directory_path, data_name)] if data_name else []
+    muon_paths = [os.path.join(directory_path, muon_name)] if muon_name else []
+    neutrino_paths = [os.path.join(directory_path, neutrino_name)] if neutrino_name else []
+
+    # Create a new dataset entry
+    new_dataset_entry = {
+        "name": name,
+        "date_added": datetime.now().strftime("%Y-%m-%d"),
+        "data_type": data_type,
+        "comment": comment,
+        "folder": "",
+        "path": {
+            "data": data_paths,
+            "data_livetime": [],
+            "muon": muon_paths,
+            "muon_livetime": [],
+            "neutrino": neutrino_paths,
+            "neutrino_livetime": [],
+        },
+    }
+
+    try:
+        # Load the existing registry
+        with open(yml_registry_path, "r") as file:
+            registry = yaml.safe_load(file) or []
+
+        # Check if the dataset name already exists
+        if any(entry["name"] == name for entry in registry):
+            print(f"Dataset '{name}' already exists in the registry. Skipping addition.")
+            return False
+
+        # Append the new dataset entry
+        registry.append(new_dataset_entry)
+        
+        # Save the updated registry back to the YAML file
+        with open(yml_registry_path, "w") as file:
+            yaml.dump(
+                registry, 
+                file, 
+                default_flow_style=False, 
+                sort_keys=False,
+                width=1000,
+            )
+            file.write("\n") 
+        if verbose:
+            print(f"Dataset '{name}' added successfully to the registry.")
+            print(f"Paths: {new_dataset_entry['path']}")
+
+        return True
+
+    except Exception as e:
+        print(f"Error while updating the registry: {e}")
+        return False

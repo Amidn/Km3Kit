@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import time
 from Km3Kit.utils.tools import report_time_interval, report_memory_usage
+from ..utils.yml_utils import Loader, load_branches_config
 
 
 
@@ -100,207 +101,60 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
 
 
 
+def DF_(dataset_name="arca21_bdt", branches_config_path="config/branches.yml", data_type="data", verbose=False):
+    """
+    Loads data into a Pandas DataFrame based on the dataset name, branch configuration, and data type.
 
+    Args:
+        dataset_name (str): Name of the dataset to load from the dataset registry.
+        branches_config_path (str): Path to the branches configuration YAML file.
+        data_type (str): Type of data to load ("data", "muon", or "nu").
+        verbose (bool): Whether to enable verbose logging.
 
-
-''' 
-def readroot(file_list, verbose=True, step_size="100 MB"):
+    Returns:
+        pd.DataFrame: The resulting DataFrame with the loaded data.
+    """
+    # Step 1: Load branch configurations
     if verbose:
-        print("Reading files in batches:", file_list)
-
-    # Initialize empty dictionaries to store data
-    file_content = {"headerTree": [], "E": [], "T": []}
-
-    for file in file_list:
-        if verbose:
-            print(f"Processing file: {file}")
-
-        # Read "headerTree" in batches
-        try:
-            if verbose:
-                print("Iterating over 'headerTree'")
-            for batch in uproot.iterate(f"{file}:headerTree", step_size=step_size, library="np"):
-                file_content["headerTree"].append(batch)
-        except Exception as e:
-            print(f"Error iterating 'headerTree' in {file}: {e}")
-
-        # Read "E" in batches
-        try:
-            if verbose:
-                print("Iterating over 'E'")
-            for batch in uproot.iterate(f"{file}:E", step_size=step_size, library="np"):
-                file_content["E"].append(batch)
-        except Exception as e:
-            print(f"Error iterating 'E' in {file}: {e}")
-
-        # Read "T" in batches
-        try:
-            if verbose:
-                print("Iterating over 'T'")
-            for batch in uproot.iterate(f"{file}:T", step_size=step_size, library="ak"):
-                file_content["T"].append(batch)
-        except Exception as e:
-            print(f"Error iterating 'T' in {file}: {e}")
+        print(f"Loading branch configurations from {branches_config_path}...")
+    branches = load_branches_config(branches_config_path)
+    E_branches = branches["E_branches"]
+    T_branches = branches["T_branches"]
 
     if verbose:
-        print("Completed reading files in batches.")
+        print("Branch structures loaded:")
+        print(f"E_branches: {E_branches}")
+        print(f"T_branches: {T_branches}")
 
-    return file_content
-'''
+    # Step 2: Load dataset paths
+    if verbose:
+        print(f"Loading dataset registry for dataset: {dataset_name}...")
+    loader_instance = Loader.readYML(dataset_name, verbose=verbose)
+    if not loader_instance:
+        raise ValueError(f"Dataset '{dataset_name}' not found in the registry.")
 
+    # Retrieve paths
+    data_dict, muon_dict, neutrino_dict = loader_instance.read_paths(verbose=verbose)
 
-'''
-def readroot(file_list, verbose=True):
-    file_content = {"headerTree": [], "E": [], "T": []}
+    # Step 3: Select file paths based on data type
+    if data_type == "data":
+        file_paths = data_dict["data"].split("\n")
+    elif data_type == "muon":
+        file_paths = muon_dict["muon"].split("\n")
+    elif data_type == "nu":
+        file_paths = neutrino_dict["neutrino"].split("\n")
+    else:
+        raise ValueError(f"Invalid data type '{data_type}'. Must be 'data', 'muon', or 'nu'.")
 
     if verbose:
-        print("Reading files:", file_list)
+        print(f"File paths to be processed for '{data_type}':")
+        print(file_paths)
 
-    for file in file_list:
-        if verbose:
-            print(f"Processing file: {file}")
-
-        # Read "headerTree"
-        try:
-            if verbose:
-                print("Attempting to read 'headerTree'")
-            tree = uproot.open(f"{file}:headerTree")
-            data = tree.arrays(library="np")
-            file_content["headerTree"].append(data)
-        except Exception as e:
-            print(f"Error reading 'headerTree' in {file}: {e}")
-
-        # Read "E"
-        try:
-            if verbose:
-                print("Attempting to read 'E'")
-            tree = uproot.open(f"{file}:E")
-            data = tree.arrays(library="np")
-            file_content["E"].append(data)
-        except Exception as e:
-            print(f"Error reading 'E' in {file}: {e}")
-
-        # Read "T"
-        try:
-            if verbose:
-                print("Attempting to read 'T'")
-            tree = uproot.open(f"{file}:T")
-            data = tree.arrays(library="ak")
-            file_content["T"].append(data)
-        except Exception as e:
-            print(f"Error reading 'T' in {file}: {e}")
+    # Step 4: Call load_dst to load data into a DataFrame
+    df = load_dst(E_branches, T_branches, file_paths, verbose=verbose)
 
     if verbose:
-        print("Completed reading files.")
+        print(f"DataFrame successfully created for data type '{data_type}'. Shape: {df.shape}")
 
-    return file_content
+    return df
 
-'''
-
-
-
-'''
-def readroot(file_list, verbose=True):
-    file_content = {}
-    
-    if verbose:
-        print("Reading files:", file_list)
-    
-    # Attempt to read "headerTree"
-    try:
-        if verbose:
-            print("Attempting to read 'headerTree'")
-        file_content["headerTree"] = uproot.concatenate([f"{file}:headerTree" for file in file_list])
-    except Exception as e:
-        print(f"Error reading 'headerTree': {e}")
-        file_content["headerTree"] = None
-
-    # Attempt to read "E"
-    try:
-        if verbose:
-            print("Attempting to read 'E'")
-        file_content["E"] = uproot.concatenate([f"{file}:E" for file in file_list] , library="np")
-    except Exception as e:
-        print(f"Error reading 'E': {e}")
-        file_content["E"] = None
-
-    # Attempt to read "T"
-    try:
-        if verbose:
-            print("Attempting to read 'T'")
-        file_content["T"] = uproot.concatenate([f"{file}:T" for file in file_list], library="ak")
-    except Exception as e:
-        print(f"Error reading 'T': {e}")
-        file_content["T"] = None
-
-    # Final output in verbose mode
-    if verbose:
-        print("Completed reading. Contents:", file_content.keys())
-
-    return file_content
-
-'''
-
-
-
-"""
-def readroot(file_list, branches_headerTree=None, branches_E = None, branches_T=None, verbose=True):
-    file_content = {}
-    
-    if verbose:
-        print("Reading files:", file_list)
-    
-    # Define default branches if not provided
-    if branches_headerTree is None:
-        branches_headerTree = ['livetime_s']  # Replace with actual branch names
-    if branches_E is None:
-        branches_E = ['Evt/run_id']
-    if branches_T is None:
-        branches_T = ['coords/trackfit_dec', 'coords/showerfit_ra']
-    
-    # Attempt to read "headerTree"
-    try:
-        if verbose:
-            print("Attempting to read 'headerTree'")
-        file_content["headerTree"] = uproot.concatenate(
-            [f"{file}:headerTree" for file in file_list],
-            expressions=branches_headerTree,
-            library="ak"
-        )
-    except Exception as e:
-        print(f"Error reading 'headerTree': {e}")
-        file_content["headerTree"] = None
-
-    # Attempt to read "E"
-    try:
-        if verbose:
-            print("Attempting to read 'E'")
-        file_content["E"] = uproot.concatenate(
-            [f"{file}:E" for file in file_list],
-            expressions=branches_E,
-            library="np"
-        )
-    except Exception as e:
-        print(f"Error reading 'E': {e}")
-        file_content["E"] = None
-
-    # Attempt to read "T"
-    try:
-        if verbose:
-            print("Attempting to read 'T'")
-        file_content["T"] = uproot.concatenate(
-            [f"{file}:T" for file in file_list],
-            expressions=branches_T,
-            library="ak"
-        )
-    except Exception as e:
-        print(f"Error reading 'T': {e}")
-        file_content["T"] = None
-
-    # Final output in verbose mode
-    if verbose:
-        print("Completed reading. Contents:", file_content.keys())
-
-    return file_content
-
-"""
