@@ -244,7 +244,7 @@ def add_dataset_to_registry(
 
 
  
-def read_configs(config_path="../config/config.yaml", key=None):
+def readConfigs(config_path="../config/config.yaml", key=None):
     """
     Reads a configuration YAML file and retrieves the value for a specified key.
 
