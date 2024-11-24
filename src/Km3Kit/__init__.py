@@ -9,6 +9,7 @@ import os
 
 __all__ = [
     "pd_dataFrame",
+    "process_dfs",
     "load_dst",
     "Loader",
     "readConfigs",
@@ -22,7 +23,7 @@ __all__ = [
 ]
 
 # Exposing data-loading and processing functions
-from .IO.io import read
+from .IO.io import read, process_dfs
 from .IO.rootio import load_dst, pd_dataFrame
 
 # Exposing YAML utility functions and classes

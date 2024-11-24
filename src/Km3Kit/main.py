@@ -1,30 +1,20 @@
 
-from utils.yml_utils import readConfigs
+from Km3Kit import process_dfs
 
-# Read the configuration
-Configs = readConfigs( verbose=True )  # Should return a dictionary
+# Load datasets and save them
+datasets = process_dfs(dataset_name="arca21_bdt", save_pd=True, verbose=True)
 
+# Access individual DataFrames
+df_data = datasets["data"]
+df_muon = datasets["muon"]
+df_neutrino = datasets["neutrino"]
 
-saving_dir = Configs["FileConfig"]["Saving_Dir"]
-print(f"Saving directory: {saving_dir}")
+# Print the first few rows of each
+print("DataFrame (Data):")
+print(df_data.head())
 
+print("DataFrame (Muon):")
+print(df_muon.head())
 
-
-
-
-print ("------------------")
-from Km3Kit import  BRANCHES_YML, DATASET_REGISTRY_YML
-from Km3Kit import pd_dataFrame
-'''
-# Load the data from the ROOT files listed in the dataset_registry.yml
-df_data = pd_dataFrame(
-    dataset_name="arca21_bdt",
-    branches_config_path="config/branches.yml",
-    data_type="data",
-    verbose=True
-)
-
-# Display the first few rows of the resulting DataFrame
-print(df_data.head())'''
-
-
+print("DataFrame (Neutrino):")
+print(df_neutrino.head())
