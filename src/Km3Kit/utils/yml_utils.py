@@ -245,7 +245,7 @@ def add_dataset_to_registry(
 
 
 
-def readConfigs(file_path="config/config.yml"):
+def readConfigs(file_path="config/Config.yml"):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Configuration file not found: {file_path}")
     
