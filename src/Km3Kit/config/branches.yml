@@ -6,7 +6,6 @@ E_branches:
 
 T_branches:
   - "bdt_trk"
-  - "bdt_casc"
   - "coords/mjd"
   - "coords/trackfit_ra"
   - "coords/trackfit_dec"
