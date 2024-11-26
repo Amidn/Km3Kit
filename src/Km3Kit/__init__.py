@@ -20,6 +20,7 @@ __all__ = [
     "DATASET_REGISTRY_YML",
     "add_dataset_to_registry",
     "read",
+    "diagnose_dataframe",
 ]
 
 # Exposing data-loading and processing functions
@@ -30,7 +31,7 @@ from .IO.rootio import load_dst, pd_dataFrame
 from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry, readConfigs
 
 # Exposing performance monitoring tools
-from .utils.tools import report_time_interval, report_memory_usage
+from .utils.tools import report_time_interval, report_memory_usage, diagnose_dataframe
 
 # Paths to YAML configuration files
 CONFIG_DIR = os.path.join(os.path.dirname(__file__), "config")

@@ -2,9 +2,12 @@ import uproot
 import awkward as ak
 import numpy as np
 import pandas as pd
+from astropy.io import fits
 import time
 from Km3Kit.utils.tools import report_time_interval, report_memory_usage
 from ..utils.yml_utils import Loader, load_branches_config
+
+
 
 
 def load_dst(E_branches, T_branches, file_paths, verbose=False):
@@ -155,3 +158,64 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
 
     return df
 
+
+
+    """
+    Convert a Pandas DataFrame into a FITS file with appropriate headers and structure.
+
+    Parameters:
+        df (pd.DataFrame): Input DataFrame with columns like 'log10_Erec', 'ra_deg', 'dec_deg', 'mjd'.
+        output_path (str): Path to save the generated FITS file.
+    """
+
+    # Step 1: Convert DataFrame columns to required formats
+    try:
+        energy = 1000.0 * 10**df['log10_Erec']  # Convert log10 energy to MeV
+        ra_values = df['ra_deg']
+        dec_values = df['dec_deg']
+        time_values = df['mjd']  # MJD time in days
+    except KeyError as e:
+        raise ValueError(f"Missing required column in DataFrame: {e}")
+
+    # Step 2: Create FITS columns
+    columns = [
+        fits.Column(name='ENERGY', format='E', unit='MeV', array=energy),
+        fits.Column(name='RA', format='E', unit='deg', array=ra_values),
+        fits.Column(name='DEC', format='E', unit='deg', array=dec_values),
+        fits.Column(name='TIME', format='D', unit='d', array=time_values)
+    ]
+
+    # Step 3: Create HDUs
+    primary_hdu = fits.PrimaryHDU()  # Primary header
+    events_hdu = fits.BinTableHDU.from_columns(columns, name='EVENTS')  # Event data HDU
+
+    # Step 4: Add metadata to headers
+    header = events_hdu.header
+    header['XTENSION'] = 'BINTABLE'
+    header['BITPIX'] = 8
+    header['NAXIS'] = 2
+    header['NAXIS1'] = len(columns)  # Number of columns
+    header['NAXIS2'] = len(ra_values)  # Number of rows
+    header['TFIELDS'] = len(columns)  # Number of fields
+    header['DATE'] = 'NONE'
+    header['DATE-OBS'] = 'NONE'
+    header['DATE-END'] = 'NONE'
+    header['TELESCOP'] = 'None'
+    header['INSTRUME'] = 'None'
+    header['OBSERVER'] = 'Arca21'
+    header['EQUINOX'] = 2000.0
+    header['RADECSYS'] = 'FK5'
+    header['MJDREFI'] = 0.0
+    header['MJDREFF'] = 0.00074287037037037  # Fraction of day
+    header['TIMEUNIT'] = 's'
+    header['TIMESYS'] = 'TT'
+    header['DSTYP2'] = 'TIME'
+    header['DSUNI2'] = 'd'
+    header['DSTYP4'] = 'ENERGY'
+    header['DSUNI4'] = 'MeV'
+    header['DSVAL4'] = '10000:2000000'
+
+    # Step 5: Write FITS file
+    hdul = fits.HDUList([primary_hdu, events_hdu])
+    hdul.writeto(output_path, overwrite=True)
+    print(f"FITS file created: {output_path}")

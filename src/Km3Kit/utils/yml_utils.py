@@ -135,7 +135,6 @@ class Loader:
             print(f"An unexpected error occurred: {exc}")
             return []
     
-
 def load_branches_config(file_path="config/branches.yml"):
     """
     Load the E and T branches configuration from a YAML file.
@@ -154,7 +153,6 @@ def load_branches_config(file_path="config/branches.yml"):
         config = yaml.safe_load(f)
     return config
 
-
 def add_dataset_to_registry(
     name,
     data_type,
@@ -165,7 +163,7 @@ def add_dataset_to_registry(
     neutrino_name=None,
     yml_registry_path="config/dataset_registry.yml",
     verbose=False,
-):
+    ):
     """
     Adds a new dataset to the dataset registry YAML file without modifying existing entries.
 
@@ -241,11 +239,7 @@ def add_dataset_to_registry(
     except Exception as e:
         print(f"Error while updating the registry: {e}")
         return False
-
-
-
-
-
+    
 def readConfigs(file_path="config/Config.yml", verbose=False):
     """
     Reads a YAML configuration file and returns its content as a dictionary.

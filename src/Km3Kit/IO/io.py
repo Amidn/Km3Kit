@@ -3,12 +3,14 @@ import astropy.units as u
 from astropy.coordinates import SkyCoord
 from gammapy.data import EventList
 from .rootio import load_dst, pd_dataFrame
-from ..utils.yml_utils import Loader, load_branches_config
-from utils.yml_utils import readConfigs
-
+from ..utils.yml_utils import Loader, load_branches_config , readConfigs, add_dataset_to_registry
+from utils.tools import  diagnose_dataframe
+import pandas as pd
+import numpy as np
+from astropy.io import fits
+import io
 import os
-from .rootio import pd_dataFrame
-from ..utils.yml_utils import readConfigs
+
 
 def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_pd=None, verbose=True):
     """
@@ -53,11 +55,22 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         muon_h5 = os.path.join(saving_dir, "Muon.h5")
         neutrino_h5 = os.path.join(saving_dir, "Neutrino.h5")
 
+
+
         # Save DataFrames to HDF5
         if verbose:
             print(f"Saving data to {data_h5}, {muon_h5}, and {neutrino_h5}...")
+
+        print("Running Data diagnostics before saving...")
+        diagnose_dataframe(data_h5)  # Run diagnostics to find potential issues
         df_data.to_hdf(data_h5, key="data", mode="w")
+
+        print("Running DataFrame diagnostics before saving...")
+        diagnose_dataframe(muon_h5)  # Run diagnostics to find potential issues
         df_muon.to_hdf(muon_h5, key="data", mode="w")
+
+        print("Running DataFrame diagnostics before saving...")
+        diagnose_dataframe(neutrino_h5)  # Run diagnostics to find potential issues
         df_neutrino.to_hdf(neutrino_h5, key="data", mode="w")
 
         if verbose:
@@ -66,7 +79,8 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         # Add the new dataset information to the registry
         if verbose:
             print("Updating the dataset registry...")
-        addDataSetToRegistry(
+
+        add_dataset_to_registry(
             name=f"{dataset_name}_converted_2pd",
             data_type="HDF5",
             comment="Converted dataset into HDF5 format.",
@@ -79,8 +93,6 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
 
     # Return DataFrames for further processing
     return {"data": df_data, "muon": df_muon, "neutrino": df_neutrino}
-
-
 
 def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_registry_path="config/dataset_registry.yml"):
     """
@@ -135,3 +147,96 @@ def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_regist
         raise ValueError(f"Invalid usage_tag: {usage_tag}. Must be 'GammaPy' or 'KM3Net'.")
     
         
+
+
+def dataframe_to_fits(df, output_path=None, save_fits=False):
+    """
+    Convert a Pandas DataFrame into a FITS file with appropriate headers and structure.
+
+    Parameters:
+        df (pd.DataFrame): Input DataFrame with columns like 'log10_Erec', 'ra_deg', 'dec_deg', 'mjd'.
+        output_path (str, optional): Path to save the generated FITS file if save_fits=True.
+        save_fits (bool): If True, save the FITS file to disk. Default is False.
+
+    Returns:
+        HDUList or None:
+        - If save_fits=False, returns the FITS HDUList object for in-memory use.
+        - If save_fits=True, saves the FITS file to the specified output_path and returns None.
+    """
+    # Step 1: Convert DataFrame columns to required formats
+    try:
+        energy = df['trks.E']  
+        run_id = df["run_id"]
+        event_id = df["id"]
+        Type = df["type"] 
+        ra_values = df['ra_deg']
+        dec_values = df['dec_deg']
+        time_values = df['mjd']  # MJD time in days
+
+        bdt_columns = df['bdt_trk'].apply(pd.Series)
+        bdt_columns.columns = ['BDT_trk_0', 'BDT_trk_1']
+        BDT_trk_0 = df['BDT_trk_0']
+        BDT_trk_1 = df['BDT_trk_1']
+
+    except KeyError as e:
+        raise ValueError(f"Missing required column in DataFrame: {e}")
+
+    # Step 2: Create FITS columns
+    columns = [
+        fits.Column(name='ENERGY', format='E', unit='GeV', array=energy),
+        fits.Column(name='RUN_ID', format='D', unit='d', array=run_id),
+        fits.Column(name='EVENT_ID', format='D', unit='d', array=event_id),
+        fits.Column(name='TYPE', format='D', unit='d', array=Type),
+
+        fits.Column(name='RA', format='E', unit='deg', array=ra_values),
+        fits.Column(name='DEC', format='E', unit='deg', array=dec_values), 	
+
+        fits.Column(name='TIME', format='D', unit='d', array=time_values),
+        fits.Column(name='BDT_trk0', format='D', unit='d', array= BDT_trk_0 ),
+        fits.Column(name='BDT_trk1', format='D', unit='d', array= BDT_trk_1 )
+    ]
+
+    # Step 3: Create HDUs
+    primary_hdu = fits.PrimaryHDU()  # Primary header
+    events_hdu = fits.BinTableHDU.from_columns(columns, name='EVENTS')  # Event data HDU
+
+    # Step 4: Add metadata to headers
+    header = events_hdu.header
+    header['XTENSION'] = 'BINTABLE'
+    header['BITPIX'] = 8
+    header['NAXIS'] = 2
+    header['NAXIS1'] = 154  # Length of one row in bytes (example value; update as needed)
+    header['NAXIS2'] = len(ra_values)  # Number of rows
+    header['TFIELDS'] = len(columns)  # Number of fields
+    header['DATE'] = 'NONE'
+    header['DATE-OBS'] = 'NONE'
+    header['DATE-END'] = 'NONE'
+    header['TELESCOP'] = 'None'
+    header['INSTRUME'] = 'None'
+    header['OBSERVER'] = 'Arca21'
+    header['EQUINOX'] = 2000.0
+    header['RADECSYS'] = 'FK5'
+    header['MJDREFI'] = 0.0
+    header['MJDREFF'] = 0.00074287037037037  # Fraction of day
+    header['TIMEUNIT'] = 's'
+    header['TIMESYS'] = 'TT'
+    header['DSTYP2'] = 'TIME'
+    header['DSUNI2'] = 'd'
+    header['DSTYP4'] = 'ENERGY'
+    header['DSUNI4'] = 'MeV'
+    header['DSVAL4'] = '10000:2000000'
+
+    # Step 5: Create HDUList
+    hdul = fits.HDUList([primary_hdu, events_hdu])
+
+    if save_fits:
+        # Save to file if requested
+        if output_path is None:
+            raise ValueError("Output path must be specified if save_fits=True.")
+        hdul.writeto(output_path, overwrite=True)
+        print(f"FITS file saved to: {output_path}")
+        return None
+    else:
+        # Keep in memory
+        print("FITS file created in memory.")
+        return hdul
