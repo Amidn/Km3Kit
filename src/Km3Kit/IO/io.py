@@ -27,9 +27,15 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
     """
     # Load the DataFrames
     if verbose:
-        print("Loading data, muon, and neutrino datasets...")
+        print("Loading data dataset...")
     df_data = pd_dataFrame(dataset_name, branches_config_path, data_type="data", verbose=verbose)
+
+    if verbose:
+        print("Loading  muon,  dataset...")
     df_muon = pd_dataFrame(dataset_name, branches_config_path, data_type="muon", verbose=verbose)
+
+    if verbose:
+        print("Loading neutrino dataset...")
     df_neutrino = pd_dataFrame(dataset_name, branches_config_path, data_type="neutrino", verbose=verbose)
 
     if save_pd:
@@ -62,15 +68,15 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
             print(f"Saving data to {data_h5}, {muon_h5}, and {neutrino_h5}...")
 
         print("Running Data diagnostics before saving...")
-        diagnose_dataframe(data_h5)  # Run diagnostics to find potential issues
+        diagnose_dataframe(df_data)  # Run diagnostics to find potential issues
         df_data.to_hdf(data_h5, key="data", mode="w")
 
         print("Running DataFrame diagnostics before saving...")
-        diagnose_dataframe(muon_h5)  # Run diagnostics to find potential issues
+        diagnose_dataframe(df_muon)  # Run diagnostics to find potential issues
         df_muon.to_hdf(muon_h5, key="data", mode="w")
 
         print("Running DataFrame diagnostics before saving...")
-        diagnose_dataframe(neutrino_h5)  # Run diagnostics to find potential issues
+        diagnose_dataframe(df_neutrino)  # Run diagnostics to find potential issues
         df_neutrino.to_hdf(neutrino_h5, key="data", mode="w")
 
         if verbose:
@@ -93,6 +99,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
 
     # Return DataFrames for further processing
     return {"data": df_data, "muon": df_muon, "neutrino": df_neutrino}
+
 
 def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_registry_path="config/dataset_registry.yml"):
     """
