@@ -1,14 +1,12 @@
 E_branches:
   - "Evt/run_id"
-  - "Evt/trks/trks.E"
+  - "Evt/id"
+  - "Evt/trks/trks.E" 
+  - "Evt/trks/trks.type"
 
 T_branches:
   - "bdt_trk"
   - "bdt_casc"
   - "coords/mjd"
-  - "coords/nu_ra"
-  - "coords/nu_dec"
   - "coords/trackfit_ra"
   - "coords/trackfit_dec"
-  - "coords/showerfit_ra"
-  - "coords/showerfit_dec"
