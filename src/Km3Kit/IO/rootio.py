@@ -105,7 +105,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
     Args:
         dataset_name (str): Name of the dataset to load from the dataset registry.
         branches_config_path (str): Path to the branches configuration YAML file.
-        data_type (str): Type of data to load ("data", "muon", or "nu").
+        data_type (str): Type of data to load ("data", "muon", or "neutrino").
         verbose (bool): Whether to enable verbose logging.
 
     Returns:
@@ -138,7 +138,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
         file_paths = data_dict["data"].split("\n")
     elif data_type == "muon":
         file_paths = muon_dict["muon"].split("\n")
-    elif data_type == "nu":
+    elif data_type == "neutrino":
         file_paths = neutrino_dict["neutrino"].split("\n")
     else:
         raise ValueError(f"Invalid data type '{data_type}'. Must be 'data', 'muon', or 'neutrino'.")
