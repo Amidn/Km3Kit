@@ -67,16 +67,16 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         if verbose:
             print(f"Saving data to {data_h5}, {muon_h5}, and {neutrino_h5}...")
 
-        print("Running Data diagnostics before saving...")
-        diagnose_dataframe(df_data)  # Run diagnostics to find potential issues
+        print("\nDiagnosing 'data' DataFrame:")
+        diagnose_dataframe(df_data)  # Diagnose the data DataFrame
+        print("\nDiagnosing 'muon' DataFrame:")
+        diagnose_dataframe(df_muon)  # Diagnose the muon DataFrame
+        print("\nDiagnosing 'neutrino' DataFrame:")
+        diagnose_dataframe(df_neutrino)  # Diagnose the neutrino DataFrame
+
+
         df_data.to_hdf(data_h5, key="data", mode="w")
-
-        print("Running DataFrame diagnostics before saving...")
-        diagnose_dataframe(df_muon)  # Run diagnostics to find potential issues
         df_muon.to_hdf(muon_h5, key="data", mode="w")
-
-        print("Running DataFrame diagnostics before saving...")
-        diagnose_dataframe(df_neutrino)  # Run diagnostics to find potential issues
         df_neutrino.to_hdf(neutrino_h5, key="data", mode="w")
 
         if verbose:
