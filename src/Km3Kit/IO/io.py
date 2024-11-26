@@ -63,6 +63,20 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         if verbose:
             print("Files successfully saved.")
 
+        # Add the new dataset information to the registry
+        if verbose:
+            print("Updating the dataset registry...")
+        addDataSetToRegistry(
+            name=f"{dataset_name}_converted_2pd",
+            data_type="HDF5",
+            comment="Converted dataset into HDF5 format.",
+            directory=saving_dir,
+            data_name="Data.h5",
+            muon_name="Muon.h5",
+            neutrino_name="Neutrino.h5",
+            verbose=verbose
+        )
+
     # Return DataFrames for further processing
     return {"data": df_data, "muon": df_muon, "neutrino": df_neutrino}
 
