@@ -1,14 +1,14 @@
-Variables:
-
-
 columns:
-  ENERGY:    [E,    trks.E_0, None]
-  RUN_ID:    [D,    run_id, None]
-  EVENT_ID:  [D, id, None]
-  TYPE:      [D, Type, None]
-  RA:        [E, ra_values, "df_column * (180 / np.pi)"]
-  DEC:       [E, dec_values, "df_column * (180 / np.pi)"]
-  TIME:      [D, time_values, None]
+  run_id:           [RUN_ID,   D,   None]
+  
+  trks.E_0 :        [ENERGY,   E,   None]
+
+  id:               [EVENT_ID, D,   None]
+  Type:             [TYPE,     D,   None]
+  ra_values:        [RA,       E,   (180 / np.pi)"]
+  dec_values:       [DEC,      E,   (180 / np.pi)"]
+  time_values:      [TIME,     D,   None]
+
 
 header:
   XTENSION: BINTABLE

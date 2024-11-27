@@ -9,6 +9,7 @@ E_branches:
   - "Evt/trks/trks.lik"
   - "Evt/trks/trks.type"
   - "Evt/trks/trks.rec_type"
+  - "Evt/trks/trks.fitinf"
 
 T_branches:
   - "bdt_trk"

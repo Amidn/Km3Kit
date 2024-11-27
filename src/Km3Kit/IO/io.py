@@ -175,18 +175,13 @@ def dataframe_to_fits(df, output_path=None, save_fits=False):
     """
     # Step 1: Convert DataFrame columns to required formats
     try:
-        energy = df['trks.E']  
         run_id = df["run_id"]
         event_id = df["id"]
-        Type = df["type"] 
-        ra_values = df['ra_deg']
-        dec_values = df['dec_deg']
         time_values = df['mjd']  # MJD time in days
-
-        bdt_columns = df['bdt_trk'].apply(pd.Series)
-        bdt_columns.columns = ['BDT_trk_0', 'BDT_trk_1']
-        BDT_trk_0 = df['BDT_trk_0']
-        BDT_trk_1 = df['BDT_trk_1']
+        Type = df["type"] 
+        energy = df['trks.E'] 
+        ra_values = df['ra_deg'] * (180 / np.pi)
+        dec_values = df['dec_deg']* (180 / np.pi0
 
     except KeyError as e:
         raise ValueError(f"Missing required column in DataFrame: {e}")
@@ -197,13 +192,9 @@ def dataframe_to_fits(df, output_path=None, save_fits=False):
         fits.Column(name='RUN_ID', format='D', unit='d', array=run_id),
         fits.Column(name='EVENT_ID', format='D', unit='d', array=event_id),
         fits.Column(name='TYPE', format='D', unit='d', array=Type),
-
         fits.Column(name='RA', format='E', unit='deg', array=ra_values),
         fits.Column(name='DEC', format='E', unit='deg', array=dec_values), 	
-
         fits.Column(name='TIME', format='D', unit='d', array=time_values),
-        fits.Column(name='BDT_trk0', format='D', unit='d', array= BDT_trk_0 ),
-        fits.Column(name='BDT_trk1', format='D', unit='d', array= BDT_trk_1 )
     ]
 
     # Step 3: Create HDUs
