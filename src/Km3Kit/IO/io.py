@@ -52,8 +52,8 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         data_h5 = os.path.join(saving_dir, "Data.h5")
         if verbose:
             print(f"Saving data to {data_h5} ...")
-        print("\nDiagnosing 'data' DataFrame:")
-        diagnose_dataframe(df_data)  # Diagnose the data DataFrame
+            print("\nDiagnosing 'data' DataFrame:")
+            diagnose_dataframe(df_data)  # Diagnose the data DataFrame
         df_data.to_hdf(data_h5, key="data", mode="w")
 
 
@@ -65,9 +65,8 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         muon_h5 = os.path.join(saving_dir, "Muon.h5")
         if verbose:
             print(f"Saving data to {muon_h5} ...")
-
-        print("\nDiagnosing 'muon' DataFrame:")
-        diagnose_dataframe(df_muon)  # Diagnose the muon DataFrame
+            print("\nDiagnosing 'muon' DataFrame:")
+            diagnose_dataframe(df_muon)  # Diagnose the muon DataFrame
         df_muon.to_hdf(muon_h5, key="data", mode="w")
 
 
@@ -78,9 +77,8 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         neutrino_h5 = os.path.join(saving_dir, "Neutrino.h5")
         if verbose:
             print(f"Saving data to  {neutrino_h5} ...")
-
-        print("\nDiagnosing 'neutrino' DataFrame:")
-        diagnose_dataframe(df_neutrino)  # Diagnose the neutrino DataFrame
+            print("\nDiagnosing 'neutrino' DataFrame:")
+            diagnose_dataframe(df_neutrino)  # Diagnose the neutrino DataFrame
         df_neutrino.to_hdf(neutrino_h5, key="data", mode="w")
 
     if save_pd:
@@ -95,7 +93,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
             name=f"{dataset_name}_converted_2pd",
             data_type="HDF5",
             comment="Converted dataset into HDF5 format.",
-            directory=saving_dir,
+            directory_path=saving_dir,
             data_name="Data.h5",
             muon_name="Muon.h5",
             neutrino_name="Neutrino.h5",
