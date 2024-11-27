@@ -49,7 +49,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         
     if save_pd:
                 
-        data_h5 = os.path.join(saving_dir, "Data.h5")
+        data_h5 = os.path.join(saving_dir,str(dataset_name) + "_converted_" + "Data.h5")
         if verbose:
             print(f"Saving data to {data_h5} ...")
             print("\nDiagnosing 'data' DataFrame:")
@@ -62,7 +62,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
     df_muon = pd_dataFrame(dataset_name, branches_config_path, data_type="muon", verbose=verbose)
 
     if save_pd:
-        muon_h5 = os.path.join(saving_dir, "Muon.h5")
+        muon_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_" + "Muon.h5")
         if verbose:
             print(f"Saving data to {muon_h5} ...")
             print("\nDiagnosing 'muon' DataFrame:")
@@ -74,7 +74,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         print("Loading neutrino dataset...")
     df_neutrino = pd_dataFrame(dataset_name, branches_config_path, data_type="neutrino", verbose=verbose)
     if save_pd:
-        neutrino_h5 = os.path.join(saving_dir, "Neutrino.h5")
+        neutrino_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_" + "Neutrino.h5")
         if verbose:
             print(f"Saving data to  {neutrino_h5} ...")
             print("\nDiagnosing 'neutrino' DataFrame:")

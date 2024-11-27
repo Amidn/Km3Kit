@@ -155,7 +155,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
     Returns:
         pd.DataFrame: The resulting DataFrame with the loaded data.
     """
-    # Step 1: Load branch configurations
+    # Load branch configurations
     if verbose:
         print(f"Loading branch configurations from {branches_config_path}...")
     branches = load_branches_config(branches_config_path)
@@ -167,7 +167,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
         print(f"E_branches: {E_branches}")
         print(f"T_branches: {T_branches}")
 
-    # Step 2: Load dataset paths
+    # Load dataset paths
     if verbose:
         print(f"Loading dataset registry for dataset: {dataset_name}...")
     loader_instance = Loader.readYML(dataset_name, verbose=verbose)
@@ -177,7 +177,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
     # Retrieve paths
     data_dict, muon_dict, neutrino_dict = loader_instance.read_paths(verbose=verbose)
 
-    # Step 3: Select file paths based on data type
+    # Select file paths based on data type
     if data_type == "data":
         file_paths = data_dict["data"].split("\n")
     elif data_type == "muon":
@@ -191,7 +191,7 @@ def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branche
         print(f"File paths to be processed for '{data_type}':")
         print(file_paths)
 
-    # Step 4: Call load_dst to load data into a DataFrame
+    # Call load_dst to load data into a DataFrame
     df = load_dst(E_branches, T_branches, file_paths, verbose=verbose)
 
     if verbose:
