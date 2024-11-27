@@ -3,6 +3,12 @@ E_branches:
   - "Evt/id"
   - "Evt/trks/trks.E" 
   - "Evt/trks/trks.type"
+  - "Evt/trks/trks.id"
+  - "Evt/trks/trks.t"
+  - "Evt/trks/trks.len" 
+  - "Evt/trks/trks.lik"
+  - "Evt/trks/trks.type"
+  - "Evt/trks/trks.rec_type"
 
 T_branches:
   - "bdt_trk"
