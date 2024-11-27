@@ -61,15 +61,17 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    str(val[i]) if isinstance(val, list) and i < len(val) else ""
+                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
                     for val in temp_column
                 ]
 
             if verbose:
                 print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
         else:
-            # Convert to string and add to the DataFrame directly
-            DF_MC[column_name] = [str(val) for val in temp_column]
+            # Convert to float and add to the DataFrame directly
+            DF_MC[column_name] = [
+            float(val) if val is not None else None for val in temp_column
+            ]
 
         max_memory = report_memory_usage(f"E_tree ({branch}) added to DataFrame", max_memory, verbose)
         if verbose:
@@ -110,15 +112,17 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    str(val[i]) if isinstance(val, list) and i < len(val) else ""
+                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
                     for val in temp_column
                 ]
 
             if verbose:
                 print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
         else:
-            # Convert to string and add to the DataFrame directly
-            DF_MC[column_name] = [str(val) for val in temp_column]
+            # Convert to float and add to the DataFrame directly
+            DF_MC[column_name] = [
+            float(val) if val is not None else None for val in temp_column
+            ]
 
         max_memory = report_memory_usage(f"T_tree ({branch}) added to DataFrame", max_memory, verbose)
         if verbose:
