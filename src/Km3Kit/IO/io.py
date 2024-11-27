@@ -181,7 +181,7 @@ def dataframe_to_fits(df, output_path=None, save_fits=False):
         Type = df["type"] 
         energy = df['trks.E'] 
         ra_values = df['ra_deg'] * (180 / np.pi)
-        dec_values = df['dec_deg']* (180 / np.pi0
+        dec_values = df['dec_deg']* (180 / np.pi0)
 
     except KeyError as e:
         raise ValueError(f"Missing required column in DataFrame: {e}")
