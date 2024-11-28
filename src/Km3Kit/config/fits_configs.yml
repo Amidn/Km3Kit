@@ -1,38 +1,38 @@
 columns:
-  trks.E_0:        [ENERGY, E, None]
-  run_id:          [RUN_ID, D, None]
-  id:              [EVENT_ID, D, None]
-  Type:            [TYPE, D, None]
-  ra_values:       [RA, E, (180 / np.pi)]
-  dec_values:      [DEC, E, (180 / np.pi)]
-  time_values:     [TIME, D, None]
+  run_id:          [RUN_ID,   D, " " , "1"]
+  id:              [EVENT_ID, D, " " , "1"]
+  Type:            [TYPE,     D, " ", "1"]
+  ra_values:       [RA,       E, deg ,(180 / np.pi)]
+  dec_values:      [DEC,     E,  deg ,(180 / np.pi)]
+  trks.E_0:        [ENERGY,  E,  GeV,  "1"]
+  time_values:     [TIME,    D,  s,    "1"]
+
 
 event_header:
   XTENSION: BINTABLE
   BITPIX: 8
   NAXIS: 2
-  NAXIS1: 154
-  NAXIS2: len(df)
-  TFIELDS: len(columns)
+  NAXIS1: 154     
+
   PCOUNT: 0
   GCOUNT : 1
   TELESCOP: KM3NeT
   INSTRUME: ARCA
   EQUINOX: 2000.0
   RADECSYS: FK5
-  DATE: NONE        #e.g.:2017-05-16T17:54:18.000
-  DATE-OBS: NONE    #e.g.:2017-05-16T17:54:18.0000'
-  DATE-END: None    # '2015-08-02T23:13:16.0000'
+  DATE: NONE       
+  DATE-OBS: NONE   
+  DATE-END: None   
   ORIGIN: INFN
   EXTNAME: EVENTS
   HDUCLASS: OGIP
   HDUCLAS1: EVENTS
   HDUCLAS2: ALL
-  TSTART  : NONE    #in Seconds                                          
-  TSTOP   : NONE  # in Seconds                                                
-  MJDREFI :      0.0      #  51910.0                                       
-  MJDREFF :      0.0      #  0.00074287037037037
-  TIMEUNIT:   s # Be Carefull!
+  TSTART  : NONE                                       
+  TSTOP   : NONE                                      
+  MJDREFI :      0.0                                   
+  MJDREFF :      0.0    
+  TIMEUNIT:   s 
   TIMESYS:    TT
 
 
@@ -42,37 +42,31 @@ GTI_header:
   BITPIX: 8
   NAXIS: 2
   NAXIS1: 154
-  NAXIS2: len(df)
-  TFIELDS: len(columns)
   PCOUNT: 0
   GCOUNT : 1
   TELESCOP: KM3NeT
   INSTRUME: ARCA
   EQUINOX: 2000.0
   RADECSYS: FK5
-  DATE: NONE        #e.g.:2017-05-16T17:54:18.000
-  DATE-OBS: NONE    #e.g.:2017-05-16T17:54:18.0000'
-  DATE-END: None    # '2015-08-02T23:13:16.0000'
+  DATE: NONE       
+  DATE-OBS: NONE    
+  DATE-END: None    
   ORIGIN: INFN
   EXTNAME: GTI
   HDUCLASS: OGIP
   HDUCLAS1: GTI
   HDUCLAS2: ALL
-  TSTART  : NONE    #in Seconds                                          
-  TSTOP   : NONE  # in Seconds                                                
-  MJDREFI :      0.0      #  51910.0                                       
-  MJDREFF :      0.0      #  0.00074287037037037
-  TIMEUNIT:   s # Be Carefull!
+  TSTART  : NONE                                            
+  TSTOP   : NONE                                       
+  MJDREFI :  0.0                                           
+  MJDREFF :  0.0     
+  TIMEUNIT:   s 
   TIMESYS:    TT
-  TIMEREF : 'LOCAL   '
-
+  TIMEREF : 'LOCAL '
 
 
 Primary:
-  SIMPLE  :                    T / conforms to FITS standard                      
-  BITPIX  :                    8 / array data type                                
-  NAXIS   :                    0 / number of array dimensions                     
-  EXTEND  :                    T                                                  
-                                                                           
-
-
+  SIMPLE: T
+  BITPIX: 8
+  NAXIS: 0
+  EXTEND: T
