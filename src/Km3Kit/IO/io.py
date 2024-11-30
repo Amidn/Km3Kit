@@ -5,7 +5,7 @@ import numpy as np
 from astropy.coordinates import SkyCoord
 from gammapy.data import EventList
 from .rootio import load_dst, pd_dataFrame
-from ..utils.yml_utils import Loader, load_branches_config , readConfigs, add_dataset_to_registry
+from Km3Kit.utils.yml_utils import Loader, load_branches_config, readConfigs, add_dataset_to_registry
 from utils.tools import  diagnose_dataframe
 from astropy.io import fits
 import io
