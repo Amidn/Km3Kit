@@ -5,7 +5,7 @@ import pandas as pd
 from astropy.io import fits
 import time
 from Km3Kit.utils.tools import report_time_interval, report_memory_usage
-from ..utils.yml_utils import Loader, load_branches_config
+from Km3Kit.utils.yml_utils import Loader, load_branches_config
 
 def load_dst(E_branches, T_branches, file_paths, verbose=False):
     E_tree = "E"
