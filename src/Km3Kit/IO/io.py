@@ -126,7 +126,7 @@ def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_registry_pa
         return dataset_name
 
     # Load the dataset names and types from the YAML registry
-    datasets = Loader.list_datasets_and_types(yml_registry_path=yml_registry_path, verbose=verbose)
+    datasets = Loader.list_datasets_and_types(verbose=verbose)
 
     # Build the names of the preprocessed datasets
     dataset_name_fits = dataset_name + "_converted_2Fits"
