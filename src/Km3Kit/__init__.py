@@ -8,6 +8,7 @@ __version__ = '0.0.1'
 import os
 
 __all__ = [
+    "create_fits_file",
     "pd_dataFrame",
     "process_dfs",
     "load_dst",
@@ -26,6 +27,7 @@ __all__ = [
 # Exposing data-loading and processing functions
 from .IO.io import read, process_dfs
 from .IO.rootio import load_dst, pd_dataFrame
+from IO.fitsio import create_fits_file
 
 # Exposing YAML utility functions and classes
 from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry, readConfigs

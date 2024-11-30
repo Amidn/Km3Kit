@@ -111,7 +111,7 @@ def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_regist
 
     Args:
         dataset_name (str): The name of the dataset (e.g., "arca21").
-        usage_tag (str): The intended usage ("GammaPy" or "KM3Net").
+        usage_tag (str): The intended usage ("MMAA" or "KM3Net"). MMAA: "Multi-Messenger Astronomy Analysis
         recreate (bool): If True, forces the use of the original dataset without checking conversions.
         verbose (bool): If True, prints detailed logs.
         yml_data_registry_path (str): Path to the YAML registry file.
@@ -133,7 +133,7 @@ def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_regist
     dataset_name_pd = dataset_name + "_converted_2pd"
 
     # Check the usage tag and look for the appropriate preprocessed dataset
-    if usage_tag == "GammaPy":
+    if usage_tag == "MMAA":
         for name, _ in datasets:
             if name == dataset_name_fits:
                 if verbose:
@@ -158,86 +158,3 @@ def read(dataset_name, usage_tag, recreate=False, verbose=False, yml_data_regist
     
         
 
-
-def dataframe_to_fits(df, output_path=None, save_fits=False):
-    """
-    Convert a Pandas DataFrame into a FITS file with appropriate headers and structure.
-
-    Parameters:
-        df (pd.DataFrame): Input DataFrame with columns like 'log10_Erec', 'ra_deg', 'dec_deg', 'mjd'.
-        output_path (str, optional): Path to save the generated FITS file if save_fits=True.
-        save_fits (bool): If True, save the FITS file to disk. Default is False.
-
-    Returns:
-        HDUList or None:
-        - If save_fits=False, returns the FITS HDUList object for in-memory use.
-        - If save_fits=True, saves the FITS file to the specified output_path and returns None.
-    """
-    # Step 1: Convert DataFrame columns to required formats
-    try:
-        run_id = df["run_id"]
-        event_id = df["id"]
-        time_values = df['mjd']  # MJD time in days
-        Type = df["type"] 
-        energy = df['trks.E'] 
-        ra_values = df['ra_deg'] * (180 / np.pi)
-        dec_values = df['dec_deg']* (180 / np.pi0)
-
-    except KeyError as e:
-        raise ValueError(f"Missing required column in DataFrame: {e}")
-
-    # Step 2: Create FITS columns
-    columns = [
-        fits.Column(name='ENERGY', format='E', unit='GeV', array=energy),
-        fits.Column(name='RUN_ID', format='D', unit='d', array=run_id),
-        fits.Column(name='EVENT_ID', format='D', unit='d', array=event_id),
-        fits.Column(name='TYPE', format='D', unit='d', array=Type),
-        fits.Column(name='RA', format='E', unit='deg', array=ra_values),
-        fits.Column(name='DEC', format='E', unit='deg', array=dec_values), 	
-        fits.Column(name='TIME', format='D', unit='d', array=time_values),
-    ]
-
-    # Step 3: Create HDUs
-    primary_hdu = fits.PrimaryHDU()  # Primary header
-    events_hdu = fits.BinTableHDU.from_columns(columns, name='EVENTS')  # Event data HDU
-
-    # Step 4: Add metadata to headers
-    header = events_hdu.header
-    header['XTENSION'] = 'BINTABLE'
-    header['BITPIX'] = 8
-    header['NAXIS'] = 2
-    header['NAXIS1'] = 154  # Length of one row in bytes (example value; update as needed)
-    header['NAXIS2'] = len(ra_values)  # Number of rows
-    header['TFIELDS'] = len(columns)  # Number of fields
-    header['DATE'] = 'NONE'
-    header['DATE-OBS'] = 'NONE'
-    header['DATE-END'] = 'NONE'
-    header['TELESCOP'] = 'None'
-    header['INSTRUME'] = 'None'
-    header['OBSERVER'] = 'Arca21'
-    header['EQUINOX'] = 2000.0
-    header['RADECSYS'] = 'FK5'
-    header['MJDREFI'] = 0.0
-    header['MJDREFF'] = 0.00074287037037037  # Fraction of day
-    header['TIMEUNIT'] = 's'
-    header['TIMESYS'] = 'TT'
-    header['DSTYP2'] = 'TIME'
-    header['DSUNI2'] = 'd'
-    header['DSTYP4'] = 'ENERGY'
-    header['DSUNI4'] = 'MeV'
-    header['DSVAL4'] = '10000:2000000'
-
-    # Step 5: Create HDUList
-    hdul = fits.HDUList([primary_hdu, events_hdu])
-
-    if save_fits:
-        # Save to file if requested
-        if output_path is None:
-            raise ValueError("Output path must be specified if save_fits=True.")
-        hdul.writeto(output_path, overwrite=True)
-        print(f"FITS file saved to: {output_path}")
-        return None
-    else:
-        # Keep in memory
-        print("FITS file created in memory.")
-        return hdul

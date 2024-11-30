@@ -1,6 +1,12 @@
 
-from Km3Kit import process_dfs
+from Km3Kit import process_dfs, read
 
+
+f = read("arca21_bdt", "MMAA")
+print (f)
+
+
+"""
 # Load datasets and save them
 datasets = process_dfs(dataset_name="arca21_bdt", save_pd=True, verbose=True)
 
@@ -17,4 +23,4 @@ print("DataFrame (Muon):")
 print(df_muon.head())
 
 print("DataFrame (Neutrino):")
-print(df_neutrino.head())
+print(df_neutrino.head())"""
