@@ -22,12 +22,14 @@ __all__ = [
     "add_dataset_to_registry",
     "get_dataset_version",
     "diagnose_dataframe",
+    "load_saved_files",
 ]
 
 # Exposing data-loading and processing functions
 from .IO.io import get_dataset_version, process_dfs
 from .IO.rootio import load_dst, pd_dataFrame
-from IO.fitsio import create_fits_file
+from .IO.fitsio import create_fits_file
+from .IO.hdf5io import load_saved_files
 
 # Exposing YAML utility functions and classes
 from .utils.yml_utils import Loader, load_branches_config, add_dataset_to_registry, readConfigs
