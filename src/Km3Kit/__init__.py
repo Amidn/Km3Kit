@@ -20,12 +20,12 @@ __all__ = [
     "BRANCHES_YML",
     "DATASET_REGISTRY_YML",
     "add_dataset_to_registry",
-    "read",
+    "get_dataset_version",
     "diagnose_dataframe",
 ]
 
 # Exposing data-loading and processing functions
-from .IO.io import read, process_dfs
+from .IO.io import get_dataset_version, process_dfs
 from .IO.rootio import load_dst, pd_dataFrame
 from IO.fitsio import create_fits_file
 

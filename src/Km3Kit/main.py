@@ -1,8 +1,8 @@
 
-from Km3Kit import process_dfs, read
+from Km3Kit import process_dfs, get_dataset_version
 
 
-f = read("arca21_bdt", "MMAA")
+f = get_dataset_version("arca21_bdt", "MMAA")
 print (f)
 
 
