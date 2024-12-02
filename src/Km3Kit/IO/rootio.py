@@ -53,7 +53,7 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
+                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
                     for val in temp_column
                 ]
 
@@ -104,10 +104,10 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
+                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
                     for val in temp_column
                 ]
-
+                
             if verbose:
                 print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
         else:
