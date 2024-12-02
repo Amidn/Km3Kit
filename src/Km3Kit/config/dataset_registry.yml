@@ -59,38 +59,3 @@
 
     neutrino_livetime: []
 
-
-- name: arca21_data_v8.1.1_h5
-  date_added: '2024-01-22'
-  data_type: h5
-  comment: ' arca21_data_v8.1.1_grb_thijsv3 data with dynamic calibration. April 2023.
-    - From /sps/km3net/users/tvaneede/dst_production/ARCA21/results/v3/merged/  (used
-    by Juan in GRB analysis)'
-  folder: ''
-  path:
-    data:
-      - /sps/km3net/users/juanpala/h5_production/arca21_data_v8.1.1_grb_thijsv3/datav8.1.1.jchain.aashower.dst.h5
-    data_livetime:
-      - /sps/km3net/users/juanpala/h5_production/arca21_data_v8.1.1_grb_thijsv3/rbrplanARCA21_v8.1_neutrinos_livetime_short.txt
-    muon:
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.mupage_tuned_100G.sirene.jterbr.jchain.aashower.dst.h5
-    muon_livetime: []
-    neutrino:
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_numu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anumu-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-CCHEDIS-shower_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anumu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anue-CCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_anutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_numu-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nutau-CCHEDIS-muon_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/mcv8.1.gsg_nue-NCHEDIS_1e2-1e8GeV.sirene.jterbr.jchain.aashower.dst.h5
-    neutrino_livetime:
-      - /sps/km3net/users/juanpala/h5_production/arca21_rbr_v8.1_grb_thijsv3/rbrplanARCA21_v8.1_neutrinos_livetime_short.txt
-
-

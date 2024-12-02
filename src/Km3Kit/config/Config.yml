@@ -1,11 +1,11 @@
 FileConfig:
-  Saving_Dir: /pbs/home/a/anayerho/SPS/DataSets/Km3KitProductions/
+  Saving_Dir: /sps/km3net/users/amid/DataSets/Km3KitProductions/
   format: PDF
 
 plots_Dir:
-  Saving_Dir: /pbs/home/a/anayerho/SPS/Plots/
+  Saving_Dir: /sps/km3net/users/amid/Plots/
   format: png
 
-DataLoading:
-  skip_Saving: False
+Congig:
+  ymlconfig: " "
 
