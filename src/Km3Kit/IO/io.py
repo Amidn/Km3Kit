@@ -124,7 +124,7 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
     """
 
     # Load the dataset names and types from the YAML registry
-    datasets = Loader.list_datasets_and_types( verbose=verbose)
+    datasets = Loader.list_datasets_and_types( verbose = verbose)
 
     # Build the names of the preprocessed datasets
     dataset_name_fits = dataset_name + "_converted_2Fits"
@@ -172,7 +172,7 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
             elif name == dataset_name:
                 datasets = process_dfs(dataset_name= dataset_name, save_pd=True, verbose=True) 
                 df_data = datasets["data"]
-                create_fits_file("config/fits_config.yml", df_data, saving_dir)
+                create_fits_file(dataset_name ,"config/fits_config.yml", df_data, saving_dir)
                 return dataset_name_fits
             
 

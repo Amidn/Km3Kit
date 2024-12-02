@@ -2,6 +2,9 @@ import pandas as pd
 import yaml
 from astropy.io import fits
 import numpy as np
+from Km3Kit.utils.yml_utils import add_dataset_to_registry
+from Km3Kit.utils.yml_utils import readConfigs
+import os
 
 def validate_header(header):
     """
@@ -95,7 +98,7 @@ def process_fits_config_multi(yaml_config, df):
     return primary_header, event_columns, event_header, gti_columns, gti_header
 
 
-def create_fits_file(yaml_path, df, output_path):
+def create_fits_file(dataset_name, yaml_path, df, output_path, verbose = False):
     """
     Creates a FITS file with Primary, Event, and GTI extensions based on the YAML configuration and DataFrame.
 
@@ -104,6 +107,23 @@ def create_fits_file(yaml_path, df, output_path):
         df (pd.DataFrame): The input Pandas DataFrame.
         output_path (str): Path to save the FITS file.
     """
+    # Load the DataFrames
+    if verbose:
+            print("Reading configuration for saving directories...")
+    configs = readConfigs(verbose=verbose)
+        
+        # Validate configuration keys
+    try:
+        saving_dir = configs["FileConfig"]["Saving_Dir"]
+    except KeyError as e:
+        raise KeyError(f"Missing configuration key: {e}. Check 'FileConfig' in your config YAML file.")
+
+    # Ensure saving directory exists
+    if not os.path.exists(saving_dir):
+        os.makedirs(saving_dir)
+        if verbose:
+            print(f"Created directory: {saving_dir}")
+
     # Read YAML configuration
     with open(yaml_path, 'r') as file:
         yaml_config = yaml.safe_load(file)
@@ -124,3 +144,19 @@ def create_fits_file(yaml_path, df, output_path):
     hdul = fits.HDUList([primary_hdu, event_hdu, gti_hdu])
     hdul.writeto(output_path, overwrite=True)
     print(f"FITS file created at {output_path}")
+    data_fits = os.path.join(saving_dir,str(dataset_name) + "_converted_" + "Data.fits")
+    muon_fits = os.path.join(saving_dir,str(dataset_name) + "_converted_" + "muon_fits")
+    neutrino_fits = os.path.join(saving_dir,str(dataset_name) + "_converted_" + "neutrino_fits")
+    add_dataset_to_registry(
+                    name=f"{dataset_name}_converted_2fitst",
+                    data_type="FITS",
+                    comment="Converted dataset into FITS format.",
+                    directory_path=saving_dir,
+                    data_name = data_fits ,
+                    muon_name = muon_fits,
+                    neutrino_name = neutrino_fits,
+                    verbose=verbose
+                )
+    print(f"FITS file path added  to {saving_dir}")
+
+    
