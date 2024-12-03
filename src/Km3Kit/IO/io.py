@@ -125,8 +125,8 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
     """
 
     # Load the dataset names and types from the YAML registry
-    datasets = Loader.list_datasets_and_types( verbose = verbose)
-    print ("--------datasets---------------->", datasets)
+    datasets_list = Loader.list_datasets_and_types( verbose = verbose)
+
     # Build the names of the preprocessed datasets
     dataset_name_fits = dataset_name + "_converted_2Fits"
     dataset_name_pd = dataset_name + "_converted_2pd"
@@ -160,22 +160,22 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
 
     # Check the usage tag and look for the appropriate preprocessed dataset
     if usage_tag == "MMAA":
-        for name, _ in datasets:
-            print ("=======================================>", name )
-            if name == dataset_name_fits:
-                if verbose:
-                    print(f"Found preprocessed FITS dataset: {dataset_name_fits}")
-                return dataset_name_fits
-            if name == dataset_name_pd:
-                datasets = load_saved_files(dataset_name_pd,  verbose=True)
-                df_data = datasets["data"]
-                create_fits_file("config/fits_config.yml", df_data, saving_dir)
-                return dataset_name_pd
-            elif name == dataset_name:
-                datasets = process_dfs(dataset_name= dataset_name, save_pd=True, verbose=True) 
-                df_data = datasets["data"]
-                create_fits_file(dataset_name ,"config/fits_config.yml", df_data, saving_dir)
-                return dataset_name_fits
+        if any(item[0] == dataset_name_fits for item in datasets_list):
+            if verbose:
+                print(f"Found preprocessed FITS dataset: {dataset_name_fits}")
+            return dataset_name_fits
+        
+        if any(item[0] == dataset_name_pd for item in datasets_list):
+            datasets = load_saved_files(dataset_name_pd,  verbose=True)
+            df_data = datasets["data"]
+            create_fits_file("config/fits_config.yml", df_data, saving_dir)
+            return dataset_name_fits
+        
+        if any(item[0] == dataset_name for item in datasets_list):
+            datasets = process_dfs(dataset_name= dataset_name, save_pd=True, verbose=True) 
+            df_data = datasets["data"]
+            create_fits_file(dataset_name ,"config/fits_config.yml", df_data, saving_dir)
+            return dataset_name_fits
             
 
     elif usage_tag == "KM3Net":
