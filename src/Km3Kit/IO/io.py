@@ -161,6 +161,7 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
     # Check the usage tag and look for the appropriate preprocessed dataset
     if usage_tag == "MMAA":
         for name, _ in datasets:
+            print (name )
             if name == dataset_name_fits:
                 if verbose:
                     print(f"Found preprocessed FITS dataset: {dataset_name_fits}")
