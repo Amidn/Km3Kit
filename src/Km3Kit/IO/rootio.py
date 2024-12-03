@@ -7,6 +7,7 @@ import time
 from Km3Kit.utils.tools import report_time_interval, report_memory_usage
 from Km3Kit.utils.yml_utils import Loader, load_branches_config
 
+
 def load_dst(E_branches, T_branches, file_paths, verbose=False):
     E_tree = "E"
     T_tree = "T"
@@ -48,47 +49,35 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             # Check for nested lists and flatten them
             def flatten_nested_list(nested):
                 if isinstance(nested, list):
-                    # Flatten the nested list
                     return [item for sublist in nested for item in (sublist if isinstance(sublist, list) else [sublist])]
-                return [nested]
+                elif nested is None:
+                    return []  # Handle None as an empty list
+                else:
+                    return [nested]
 
             temp_column = [flatten_nested_list(val) for val in temp_column]
 
             # Determine the maximum length of flattened lists
             max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
 
-            # Create new columns for each index in the flattened list
-            for i in range(max_length):
-                new_col_name = f"{column_name}_{i}"
-                DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
-                    for val in temp_column
-                ]
+            if max_length > 0:
+                # Create new columns for each index in the flattened list
+                for i in range(max_length):
+                    new_col_name = f"{column_name}_{i}"
+                    DF_MC[new_col_name] = [
+                        float(val[i]) if isinstance(val, list) and len(val) > i and val[i] is not None else None
+                        for val in temp_column
+                    ]
 
-            if verbose:
-                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
-
-
-
-#        # Check if the column is mixed and handle accordingly
-#        if any(isinstance(val, list) for val in temp_column):
-            # Determine the maximum length of lists in the column
-#            max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
-
-            # Create new columns for each index in the list
-#            for i in range(max_length):
-#                new_col_name = f"{column_name}_{i}"
-##                DF_MC[new_col_name] = [
-#                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
-#                    for val in temp_column
-#                ]
-
-#            if verbose:
-#                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+                if verbose:
+                    print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+            else:
+                if verbose:
+                    print(f"Column '{column_name}' has only empty lists. No sub-columns created.")
         else:
             # Convert to float and add to the DataFrame directly
             DF_MC[column_name] = [
-            float(val) if val is not None else None for val in temp_column
+                float(val) if val is not None else None for val in temp_column
             ]
 
         max_memory = report_memory_usage(f"E_tree ({branch}) added to DataFrame", max_memory, verbose)
@@ -125,47 +114,35 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
             # Check for nested lists and flatten them
             def flatten_nested_list(nested):
                 if isinstance(nested, list):
-                # Flatten the nested list
                     return [item for sublist in nested for item in (sublist if isinstance(sublist, list) else [sublist])]
-                return [nested]
+                elif nested is None:
+                    return []  # Handle None as an empty list
+                else:
+                    return [nested]
 
             temp_column = [flatten_nested_list(val) for val in temp_column]
 
             # Determine the maximum length of flattened lists
             max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
 
-            # Create new columns for each index in the flattened list
-            for i in range(max_length):
-                new_col_name = f"{column_name}_{i}"
-                DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
-                    for val in temp_column
-                ]
+            if max_length > 0:
+                # Create new columns for each index in the flattened list
+                for i in range(max_length):
+                    new_col_name = f"{column_name}_{i}"
+                    DF_MC[new_col_name] = [
+                        float(val[i]) if isinstance(val, list) and len(val) > i and val[i] is not None else None
+                        for val in temp_column
+                    ]
 
-            if verbose:
-                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
-
-
-        # Check if the column is mixed and handle accordingly
-#        if any(isinstance(val, list) for val in temp_column):
-#            # Determine the maximum length of lists in the column
-#            max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
-
-#            # Create new columns for each index in the list
-#            for i in range(max_length):
-#                new_col_name = f"{column_name}_{i}"
-#                DF_MC[new_col_name] = [
-#                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
-#                    for val in temp_column
-#                ]
-
-#            if verbose:
-#                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
-
+                if verbose:
+                    print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+            else:
+                if verbose:
+                    print(f"Column '{column_name}' has only empty lists. No sub-columns created.")
         else:
             # Convert to float and add to the DataFrame directly
             DF_MC[column_name] = [
-            float(val) if val is not None else None for val in temp_column
+                float(val) if val is not None else None for val in temp_column
             ]
 
         max_memory = report_memory_usage(f"T_tree ({branch}) added to DataFrame", max_memory, verbose)
@@ -192,6 +169,7 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
         print(f">>>>>>>>>>>>>>>>>>>> Maximum memory usage during process: {max_memory:.2f} MB")
 
     return DF_MC
+
 
 
 def pd_dataFrame(dataset_name="arca21_bdt", branches_config_path="config/branches.yml", data_type="data", verbose=False):
