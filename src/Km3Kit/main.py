@@ -5,7 +5,7 @@
 from Km3Kit import process_dfs, get_dataset_version
 
 
-f = get_dataset_version("arca21_bdt", "KM3Net")
+f = get_dataset_version("arca21_bdt", "MMAA")
 print (f)
 
 
