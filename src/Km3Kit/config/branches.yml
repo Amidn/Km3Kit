@@ -1,4 +1,5 @@
 E_branches:
+  - "Evt/w"
   - "Evt/run_id"
   - "Evt/id"
   - "Evt/trks/trks.E" 
@@ -9,7 +10,6 @@ E_branches:
   - "Evt/trks/trks.lik"
   - "Evt/trks/trks.type"
   - "Evt/trks/trks.rec_type"
-  - "Evt/w"
  
 
 T_branches:
