@@ -166,6 +166,8 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
             return dataset_name_fits
         
         if any(item[0] == dataset_name_pd for item in datasets_list):
+            if verbose:
+                print(f"Found preprocessed h5 dataset: {dataset_name_pd}")
             datasets = load_saved_files(dataset_name_pd,  verbose=True)
             df_data = datasets["data"]
             create_fits_file("config/fits_config.yml", df_data, saving_dir)
