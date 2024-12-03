@@ -44,21 +44,47 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
         # Add current branch to DataFrame
         temp_column = E_data[column_name].to_list()
 
-        # Check if the column is mixed and handle accordingly
         if any(isinstance(val, list) for val in temp_column):
-            # Determine the maximum length of lists in the column
+            # Check for nested lists and flatten them
+            def flatten_nested_list(nested):
+                if isinstance(nested, list):
+                    # Flatten the nested list
+                    return [item for sublist in nested for item in (sublist if isinstance(sublist, list) else [sublist])]
+                return [nested]
+
+            temp_column = [flatten_nested_list(val) for val in temp_column]
+
+            # Determine the maximum length of flattened lists
             max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
 
-            # Create new columns for each index in the list
+            # Create new columns for each index in the flattened list
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
+                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
                     for val in temp_column
                 ]
 
             if verbose:
                 print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+
+
+
+#        # Check if the column is mixed and handle accordingly
+#        if any(isinstance(val, list) for val in temp_column):
+            # Determine the maximum length of lists in the column
+#            max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
+
+            # Create new columns for each index in the list
+#            for i in range(max_length):
+#                new_col_name = f"{column_name}_{i}"
+##                DF_MC[new_col_name] = [
+#                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
+#                    for val in temp_column
+#                ]
+
+#            if verbose:
+#                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
         else:
             # Convert to float and add to the DataFrame directly
             DF_MC[column_name] = [
@@ -95,21 +121,47 @@ def load_dst(E_branches, T_branches, file_paths, verbose=False):
         # Add current branch to DataFrame
         temp_column = T_data[column_name].to_list()
 
-        # Check if the column is mixed and handle accordingly
         if any(isinstance(val, list) for val in temp_column):
-            # Determine the maximum length of lists in the column
+            # Check for nested lists and flatten them
+            def flatten_nested_list(nested):
+                if isinstance(nested, list):
+                # Flatten the nested list
+                    return [item for sublist in nested for item in (sublist if isinstance(sublist, list) else [sublist])]
+                return [nested]
+
+            temp_column = [flatten_nested_list(val) for val in temp_column]
+
+            # Determine the maximum length of flattened lists
             max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
 
-            # Create new columns for each index in the list
+            # Create new columns for each index in the flattened list
             for i in range(max_length):
                 new_col_name = f"{column_name}_{i}"
                 DF_MC[new_col_name] = [
-                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
+                    float(val[i]) if isinstance(val, list) and i < len(val) and val[i] is not None else None
                     for val in temp_column
                 ]
-                
+
             if verbose:
                 print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+
+
+        # Check if the column is mixed and handle accordingly
+#        if any(isinstance(val, list) for val in temp_column):
+#            # Determine the maximum length of lists in the column
+#            max_length = max(len(val) if isinstance(val, list) else 0 for val in temp_column)
+
+#            # Create new columns for each index in the list
+#            for i in range(max_length):
+#                new_col_name = f"{column_name}_{i}"
+#                DF_MC[new_col_name] = [
+#                    float(val[i]) if isinstance(val, list) and i < len(val) and not isinstance(val[i], list) and val[i] is not None else None
+#                    for val in temp_column
+#                ]
+
+#            if verbose:
+#                print(f"Column '{column_name}' has been split into {max_length} sub-columns.")
+
         else:
             # Convert to float and add to the DataFrame directly
             DF_MC[column_name] = [
