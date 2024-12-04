@@ -8,7 +8,8 @@ from Km3Kit.IO.fitsio import create_fits_file
 
 df_data = pd.read_hdf("/sps/km3net/users/amid/DataSets/Km3KitProductions/arca21_bdt_converted_Data.h5", key="data")
 print(df_data.columns)
-create_fits_file(dataset_name ,"config/fits_configs.yml", df_data, saving_dir)
+create_fits_file("arca21_bdt" ,"config/fits_configs.yml", df_data, "/sps/km3net/users/amid/DataSets/Km3KitProductions/")
+print ("Done")
 #f = get_dataset_version("arca21_bdt", "MMAA")
 #print (f)
 
@@ -31,3 +32,7 @@ print(df_muon.head())
 
 print("DataFrame (Neutrino):")
 print(df_neutrino.head())"""
+
+
+
+
