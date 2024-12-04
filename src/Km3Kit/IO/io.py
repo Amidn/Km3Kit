@@ -160,8 +160,6 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
 
     # Check the usage tag and look for the appropriate preprocessed dataset
     if usage_tag == "MMAA":
-        if verbose:
-                print("---------------------> MMAA: 1")
         if any(item[0] == dataset_name_fits for item in datasets_list):
             if verbose:
                 print(f"Found preprocessed FITS dataset: {dataset_name_fits}")
@@ -178,7 +176,7 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
         if any(item[0] == dataset_name for item in datasets_list):
             datasets = process_dfs(dataset_name= dataset_name, save_pd=True, verbose=True) 
             df_data = datasets["data"]
-            create_fits_file(dataset_name ,"config/fits_config.yml", df_data, saving_dir)
+            create_fits_file(dataset_name ,"config/fits_configs.yml", df_data, saving_dir)
             return dataset_name_fits
             
 
