@@ -1,11 +1,11 @@
 columns:
-  run_id:          [RUN_ID,   D, " " , "1"]
-  id:              [EVENT_ID, D, " " , "1"]
-  trks.rec_type_0:            [TYPE,     D, " ", "1"]
-  trackfit_ra:     [RA,       E, deg ,(57.2957795131)]
-  trackfit_dec:    [DEC,     E,  deg ,(57.2957795131)]
-  trks.E_0:        [ENERGY,  E,  GeV,  "1"]
-  mjd:             [TIME,    D,  s,    "1"]
+  run_id:          [RUN_ID,   D,  " " , "1"]
+  id:              [EVENT_ID, D,  " " , "1"]
+  trks.rec_type_0: [TYPE,     D,  " ", "1"]
+  trackfit_ra:     [RA,       E,  deg ,(57.2957795131)]
+  trackfit_dec:    [DEC,      E,  deg ,(57.2957795131)]
+  trks.E_0:        [ENERGY,   E,  GeV,  "1"]
+  mjd:             [TIME,     D,  s,    "1"]
 
 
 
