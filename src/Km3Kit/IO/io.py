@@ -50,7 +50,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
     df_muon = pd_dataFrame(dataset_name, branches_config_path, data_type="muon", verbose=verbose)
 
     if save_pd:
-        muon_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_" + "Muon.h5")
+        muon_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_h5" + "Muon.h5")
         if verbose:
             print(f"Saving data to {muon_h5} ...")
             print("\nDiagnosing 'muon' DataFrame:")
@@ -62,7 +62,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
         print("Loading neutrino dataset...")
     df_neutrino = pd_dataFrame(dataset_name, branches_config_path, data_type="neutrino", verbose=verbose)
     if save_pd:
-        neutrino_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_" + "Neutrino.h5")
+        neutrino_h5 = os.path.join(saving_dir, str(dataset_name) + "_converted_h5" + "Neutrino.h5")
         if verbose:
             print(f"Saving data to  {neutrino_h5} ...")
             print("\nDiagnosing 'neutrino' DataFrame:")
@@ -75,7 +75,7 @@ def process_dfs(dataset_name, branches_config_path="config/branches.yml", save_p
     df_data = pd_dataFrame(dataset_name, branches_config_path, data_type="data", verbose=verbose)
         
     if save_pd:          
-        data_h5 = os.path.join(saving_dir,str(dataset_name) + "_converted_" + "Data.h5")
+        data_h5 = os.path.join(saving_dir,str(dataset_name) + "_converted_h5" + "Data.h5")
         if verbose:
             print(f"Saving data to {data_h5} ...")
             print("\nDiagnosing 'data' DataFrame:")
@@ -160,6 +160,8 @@ def get_dataset_version(dataset_name, usage_tag, recreate=False, verbose=False, 
 
     # Check the usage tag and look for the appropriate preprocessed dataset
     if usage_tag == "MMAA":
+        if verbose:
+                print("---------------------> MMAA: 1")
         if any(item[0] == dataset_name_fits for item in datasets_list):
             if verbose:
                 print(f"Found preprocessed FITS dataset: {dataset_name_fits}")
