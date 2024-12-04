@@ -34,9 +34,9 @@ def load_saved_files(dataset_name, verbose=True):
 
 
     # Construct file paths
-    data_h5 = os.path.join(saving_dir, f"{dataset_name}_converted_Data.h5")
-    muon_h5 = os.path.join(saving_dir, f"{dataset_name}_converted_Muon.h5")
-    neutrino_h5 = os.path.join(saving_dir, f"{dataset_name}_converted_Neutrino.h5")
+    data_h5 = os.path.join(saving_dir, f"{dataset_name}_Data.h5")
+    muon_h5 = os.path.join(saving_dir, f"{dataset_name}_Muon.h5")            
+    neutrino_h5 = os.path.join(saving_dir, f"{dataset_name}_Neutrino.h5")
 
     # Check if files exist
     if verbose:
