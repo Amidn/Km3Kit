@@ -8,7 +8,6 @@ columns:
   mjd:             [TIME,     D,  s,    "1"]
 
 
-
 event_header:
   XTENSION: BINTABLE
   BITPIX: 8
@@ -35,7 +34,6 @@ event_header:
   MJDREFF :      0.0    
   TIMEUNIT:   s 
   TIMESYS:    TT
-
 
 
 GTI_header:
