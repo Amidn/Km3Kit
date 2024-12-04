@@ -3,10 +3,12 @@
 
 import os
 import pandas as pd
+from Km3Kit.IO.fitsio import create_fits_file
 #from Km3Kit import process_dfs, get_dataset_version
 
 df_data = pd.read_hdf("/sps/km3net/users/amid/DataSets/Km3KitProductions/arca21_bdt_converted_Data.h5", key="data")
-
+print(df_data.columns)
+create_fits_file(dataset_name ,"config/fits_configs.yml", df_data, saving_dir)
 #f = get_dataset_version("arca21_bdt", "MMAA")
 #print (f)
 
