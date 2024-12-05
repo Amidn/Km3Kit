@@ -8,7 +8,7 @@ from Km3Kit.IO.fitsio import create_fits_file
 from Km3Kit.IO.hdf5io import load_saved_files
 from .rootio import load_dst, pd_dataFrame
 from Km3Kit.utils.yml_utils import Loader, load_branches_config, readConfigs, add_dataset_to_registry
-from utils.tools import  diagnose_dataframe
+from ..utils.tools import  diagnose_dataframe
 from astropy.io import fits
 import io
 import os
