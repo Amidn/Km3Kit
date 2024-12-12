@@ -198,7 +198,7 @@ class KM3NetIRFGenerator:
             data_uproot[l]['dir_y_mc'] = dir_y_mc_first.to_numpy()
             data_uproot[l]['dir_z_mc'] = dir_z_mc_first.to_numpy()
             data_uproot[l]['weight_w2'] = E['Evt/w'].array().to_numpy()[:,1]
-            bdt = T['bdt'].array().to_numpy()
+            bdt = T['bdt_trk'].array().to_numpy()
             data_uproot[l]['bdt0'] = bdt[:,0]
             data_uproot[l]['bdt1'] = bdt[:,1]
 
@@ -227,7 +227,7 @@ class KM3NetIRFGenerator:
             data_mu['dir_x_mc'].append(E['Evt/mc_trks/mc_trks.dir.x'].array().to_numpy()[:,0])
             data_mu['dir_y_mc'].append(E['Evt/mc_trks/mc_trks.dir.y'].array().to_numpy()[:,0])
             data_mu['dir_z_mc'].append(E['Evt/mc_trks/mc_trks.dir.z'].array().to_numpy()[:,0])
-            bdt = T['bdt'].array().to_numpy()
+            bdt = T['bdt_trk'].array().to_numpy()
             data_mu['bdt0'].append(bdt[:,0])
             data_mu['bdt1'].append(bdt[:,1])
 
