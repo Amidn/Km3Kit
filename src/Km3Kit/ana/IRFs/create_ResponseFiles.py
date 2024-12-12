@@ -14,7 +14,7 @@ from km3pipe.math import azimuth, zenith
 import astropy.coordinates as ac
 from astropy.time import Time
 
-import flux as km3_flux
+from Km3Kit.ana.flux import flux as km3_flux
 
 
 def calc_theta(table, mc=True):
