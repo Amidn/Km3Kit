@@ -1,5 +1,5 @@
 import numpy as np
-import km3io
+from Km3Kit.IO.DST import DST
 from astropy.io import fits
 import astropy.units as u
 from gammapy.irf import EnergyDispersion2D
@@ -10,7 +10,8 @@ from collections import defaultdict
 
 import numba as nb
 from numba import jit, prange 
-from km3pipe.math import azimuth, zenith
+from Km3Kit.ana.tools.math import zenith
+
 import astropy.coordinates as ac
 from astropy.time import Time
 
@@ -163,9 +164,9 @@ class KM3NetIRFGenerator:
         self.atm_mu_rate_out = None
 
     def read_data(self):
-        # Read neutrino files with km3io
-        self.f_nu_km3io = km3io.OfflineReader(self.filename_nu)
-        self.f_nubar_km3io = km3io.OfflineReader(self.filename_nubar)
+        # Read neutrino files with 
+        self.f_nu = DST(self.filename_nu)
+        self.f_nubar = DST(self.filename_nubar)
 
         # Read neutrino files with uproot
         f_nu_uproot = uproot.open(self.filename_nu)
@@ -195,8 +196,8 @@ class KM3NetIRFGenerator:
         files_atm_mu = [self.filename_mu]
         live_times_mu = []
         for fname in files_atm_mu:
-            f = km3io.OfflineReader(fname)
-            t = f.header.livetime.numberOfSeconds
+            f = DST(fname)
+            t = f.header.DAQ.livetime
             live_times_mu.append(t)
 
         data_mu = defaultdict(list)
@@ -246,8 +247,8 @@ class KM3NetIRFGenerator:
     def apply_weights(self):
         # Apply weights based on weight_factor
         self.weights = dict()
-        alpha_nu = self.f_nu_km3io.header.spectrum.alpha
-        alpha_nubar = self.f_nubar_km3io.header.spectrum.alpha
+        alpha_nu = self.f_nu.header.spectrum.alpha
+        alpha_nubar = self.f_nubar.header.spectrum.alpha
 
         w_nu = (self.df_nu_q.energy_mc**(self.weight_factor - alpha_nu)).to_numpy()
         w_nu *= len(self.df_nu_q) / w_nu.sum()
@@ -261,7 +262,7 @@ class KM3NetIRFGenerator:
 
     def compute_aeff(self):
         # Compute Effective Area
-        nevents = self.f_nu_km3io.header.genvol.numberOfEvents + self.f_nubar_km3io.header.genvol.numberOfEvents
+        nevents = self.f_nu.header.genvol.numberOfEvents + self.f_nubar.header.genvol.numberOfEvents
         self.aeff = aeff_2D(self.e_bins_fine, self.t_bins_fine, self.df_nu_all_q,
                             gamma=(-self.weight_factor), nevents=nevents)*2
 
@@ -329,10 +330,10 @@ class KM3NetIRFGenerator:
 
         aeff_nu = aeff_2D(self.e_bins_fine, self.t_bins_fine, self.df_nu_q,
                           gamma=(-self.weight_factor),
-                          nevents=self.f_nu_km3io.header.genvol.numberOfEvents)*2
+                          nevents=self.f_nu.header.genvol.numberOfEvents)*2
         aeff_nubar = aeff_2D(self.e_bins_fine, self.t_bins_fine, self.df_nubar_q,
                              gamma=(-self.weight_factor),
-                             nevents=self.f_nubar_km3io.header.genvol.numberOfEvents)*2
+                             nevents=self.f_nubar.header.genvol.numberOfEvents)*2
 
         atm_conv_flux = dict()
         atm_prompt_flux = dict()

@@ -12,6 +12,7 @@ from .IO.rootio import load_dst, pd_dataFrame
 from .IO.fitsio import create_fits_file
 from .IO.hdf5io import load_saved_files
 from .plugins.Gpyio import read_eve_cat
+from .IO.DST import DST
 
 from .ana.flux import atmospheric_conventional, atmospheric_flux, atmospheric_prompt
 from ana.IRFs.create_ResponseFiles import KM3NetIRFGenerator
@@ -33,6 +34,7 @@ for path in [BRANCHES_YML, DATASET_REGISTRY_YML]:
 
 # Define the public API of the package
 __all__ = [
+    "DST",
     "create_fits_file",
     "pd_dataFrame",
     "process_dfs",
