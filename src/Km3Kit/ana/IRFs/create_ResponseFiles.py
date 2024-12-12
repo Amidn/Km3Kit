@@ -7,13 +7,12 @@ from scipy.ndimage.filters import gaussian_filter1d, gaussian_filter
 import pandas as pd
 import uproot
 from collections import defaultdict
-
+import awkward as ak
 import numba as nb
 from numba import jit, prange 
 from Km3Kit.ana.tools.math import zenith
-
 import astropy.coordinates as ac
-from astropy.time import Time
+#from astropy.time import Time
 
 from Km3Kit.ana.flux import flux as km3_flux
 
@@ -177,13 +176,27 @@ class KM3NetIRFGenerator:
             E = f['E;1']
             T = f['T;1']
 
-            data_uproot[l] = dict()
+            # Handle variable-length arrays
+            energy_mc_array = E['Evt/mc_trks/mc_trks.E'].array()
+            dir_x_mc_array = E['Evt/mc_trks/mc_trks.dir.x'].array()
+            dir_y_mc_array = E['Evt/mc_trks/mc_trks.dir.y'].array()
+            dir_z_mc_array = E['Evt/mc_trks/mc_trks.dir.z'].array()
+
+            # Extract the first track for each event
+            energy_mc_first = ak.firsts(energy_mc_array)
+            dir_x_mc_first = ak.firsts(dir_x_mc_array)
+            dir_y_mc_first = ak.firsts(dir_y_mc_array)
+            dir_z_mc_first = ak.firsts(dir_z_mc_array)
+
+
+
+            data_uproot[l] = {}
             data_uproot[l]['E'] = E['Evt/trks/trks.E'].array().to_numpy()[:,0]
             data_uproot[l]['dir_z'] = E['Evt/trks/trks.dir.z'].array().to_numpy()[:,0]
-            data_uproot[l]['energy_mc'] = E['Evt/mc_trks/mc_trks.E'].array().to_numpy()[:,0]
-            data_uproot[l]['dir_x_mc'] = E['Evt/mc_trks/mc_trks.dir.x'].array().to_numpy()[:,0]
-            data_uproot[l]['dir_y_mc'] = E['Evt/mc_trks/mc_trks.dir.y'].array().to_numpy()[:,0]
-            data_uproot[l]['dir_z_mc'] = E['Evt/mc_trks/mc_trks.dir.z'].array().to_numpy()[:,0]
+            data_uproot[l]['energy_mc'] = energy_mc_first.to_numpy()
+            data_uproot[l]['dir_x_mc'] = dir_x_mc_first.to_numpy()
+            data_uproot[l]['dir_y_mc'] = dir_y_mc_first.to_numpy()
+            data_uproot[l]['dir_z_mc'] = dir_z_mc_first.to_numpy()
             data_uproot[l]['weight_w2'] = E['Evt/w'].array().to_numpy()[:,1]
             bdt = T['bdt'].array().to_numpy()
             data_uproot[l]['bdt0'] = bdt[:,0]
