@@ -115,14 +115,12 @@ class KM3NetIRFGenerator:
     def __init__(self,
                  filename_nu,
                  filename_nubar,
-                 filename_mu10,
-                 filename_mu50,
+                 filename_mu,
                  save_dir,
                  weight_factor=-2.5):
         self.filename_nu = filename_nu
         self.filename_nubar = filename_nubar
-        self.filename_mu10 = filename_mu10
-        self.filename_mu50 = filename_mu50
+        self.filename_mu = filename_mu
         self.save_dir = save_dir
         self.weight_factor = weight_factor
 
@@ -194,7 +192,7 @@ class KM3NetIRFGenerator:
         self.df_nubar = pd.DataFrame(data_uproot['nubar'])
 
         # Atmospheric muons
-        files_atm_mu = [self.filename_mu10, self.filename_mu50]
+        files_atm_mu = [self.filename_mu]
         live_times_mu = []
         for fname in files_atm_mu:
             f = km3io.OfflineReader(fname)
