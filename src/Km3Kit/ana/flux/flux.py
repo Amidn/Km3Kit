@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 from ctypes import cdll
 import ctypes
