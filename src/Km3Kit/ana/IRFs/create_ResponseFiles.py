@@ -7,7 +7,7 @@ from scipy.ndimage.filters import gaussian_filter1d, gaussian_filter
 import pandas as pd
 import uproot
 from collections import defaultdict
-import flux as km3_flux
+
 import numba as nb
 from numba import jit, prange 
 from km3pipe.math import azimuth, zenith
