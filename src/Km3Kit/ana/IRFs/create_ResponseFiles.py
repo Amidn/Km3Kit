@@ -117,11 +117,13 @@ class KM3NetIRFGenerator:
                  filename_nubar,
                  filename_mu10,
                  filename_mu50,
+                 save_dir,
                  weight_factor=-2.5):
         self.filename_nu = filename_nu
         self.filename_nubar = filename_nubar
         self.filename_mu10 = filename_mu10
         self.filename_mu50 = filename_mu50
+        self.save_dir = save_dir
         self.weight_factor = weight_factor
 
         # Will be filled by subsequent methods
@@ -398,7 +400,7 @@ class KM3NetIRFGenerator:
         hdu2.header['HDUCLAS3'] = 'FULL-ENCLOSURE'
         hdu2.header['HDUCLAS4'] = 'AEFF_2D'
         aeff_fits = fits.HDUList([hdu, hdu2])
-        aeff_fits.writeto('aeff.fits', overwrite=True)
+        aeff_fits.writeto(self.save_dir+'aeff.fits', overwrite=True)
 
         # PSF
         col1 = fits.Column(name='ENERG_LO', format='{}E'.format(len(self.e_bins_coarse)), unit='GeV', array=[self.e_bins_coarse[:-1]])
@@ -419,7 +421,7 @@ class KM3NetIRFGenerator:
         hdu2.header['HDUCLAS3'] = 'FULL-ENCLOSURE'
         hdu2.header['HDUCLAS4'] = 'PSF_TABLE'
         psf_fits = fits.HDUList([hdu, hdu2])
-        psf_fits.writeto('psf.fits', overwrite=True)
+        psf_fits.writeto(self.save_dir+'psf.fits', overwrite=True)
 
         # EDISP
         col1 = fits.Column(name='ENERG_LO', format='{}E'.format(len(self.e_bins_coarse)), unit='GeV', array=[self.e_bins_coarse[:-1]])
@@ -440,7 +442,7 @@ class KM3NetIRFGenerator:
         hdu2.header['HDUCLAS3'] = 'FULL-ENCLOSURE'
         hdu2.header['HDUCLAS4'] = 'EDISP_2D'
         edisp_fits = fits.HDUList([hdu, hdu2])
-        edisp_fits.writeto('edisp.fits', overwrite=True)
+        edisp_fits.writeto(self.save_dir+'edisp.fits', overwrite=True)
 
         # BKG NU
         col1 = fits.Column(name='ENERG_LO', format='{}E'.format(len(self.e_bins_fine_ext)), unit='GeV',
@@ -463,7 +465,7 @@ class KM3NetIRFGenerator:
         hdu2.header['HDUCLAS3'] = 'FULL-ENCLOSURE'
         hdu2.header['HDUCLAS4'] = 'BKG_2D'
         bkg_fits = fits.HDUList([hdu, hdu2])
-        bkg_fits.writeto('bkg_nu.fits', overwrite=True)
+        bkg_fits.writeto(self.save_dir+'bkg_nu.fits', overwrite=True)
 
         # BKG MU
         t_bins_mu_out = np.insert(np.arccos(self.cos_bins_fine[1:] + 1./len(self.t_bins_fine)), 0, 0.0)
@@ -487,7 +489,7 @@ class KM3NetIRFGenerator:
         hdu2.header['HDUCLAS3'] = 'FULL-ENCLOSURE'
         hdu2.header['HDUCLAS4'] = 'BKG_2D'
         bkg_fits_mu = fits.HDUList([hdu, hdu2])
-        bkg_fits_mu.writeto('bkg_mu.fits', overwrite=True)
+        bkg_fits_mu.writeto(self.save_dir +'bkg_mu.fits', overwrite=True)
 
     def create(self):
         self.read_data()
