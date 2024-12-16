@@ -210,7 +210,8 @@ class KM3NetIRFGenerator:
         live_times_mu = []
         for fname in files_atm_mu:
             f = DST(fname)
-            t = f.header.DAQ.livetime
+            header = f.head()
+            t = header.DAQ.livetime
             live_times_mu.append(t)
 
         data_mu = defaultdict(list)
