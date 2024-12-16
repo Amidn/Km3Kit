@@ -8,7 +8,7 @@ class Loader:
     ALLOWED_DATA_TYPES = {"ROOT", "h5", "Panda", "CSV", "TXT"}
 # Construct the correct path to the YAML file
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    print ("BASE_DIR", BASE_DIR)
+    print ("BASE_DIR:", BASE_DIR)
     YAML_FILE_PATH = os.path.join(BASE_DIR, '../config', 'dataset_registry.yml')
 
     def __init__(self, name=None, date_added=None, data_type=None, comment=None, paths=None):
