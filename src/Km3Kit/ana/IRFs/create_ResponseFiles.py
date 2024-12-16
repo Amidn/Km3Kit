@@ -278,8 +278,11 @@ class KM3NetIRFGenerator:
         self.weights_all = np.concatenate([w_nu, w_nubar])
 
     def compute_aeff(self):
+        header_nu =  self.f_nu.head()
+        header_nubar = self.f_nubar.head()
+
         # Compute Effective Area
-        nevents = self.f_nu.header.genvol.numberOfEvents + self.f_nubar.header.genvol.numberOfEvents
+        nevents = header_nu.genvol.numberOfEvents + header_nubar.genvol.numberOfEvents
         self.aeff = aeff_2D(self.e_bins_fine, self.t_bins_fine, self.df_nu_all_q,
                             gamma=(-self.weight_factor), nevents=nevents)*2
 
