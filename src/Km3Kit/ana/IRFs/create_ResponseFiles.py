@@ -261,8 +261,8 @@ class KM3NetIRFGenerator:
     def apply_weights(self):
         # Apply weights based on weight_factor
         self.weights = dict()
-        alpha_nu = self.f_nu.header.spectrum.alpha
-        alpha_nubar = self.f_nubar.header.spectrum.alpha
+        alpha_nu = self.f_nu.head.header.spectrum.alpha
+        alpha_nubar = self.f_nubar.head.header.spectrum.alpha
 
         w_nu = (self.df_nu_q.energy_mc**(self.weight_factor - alpha_nu)).to_numpy()
         w_nu *= len(self.df_nu_q) / w_nu.sum()
